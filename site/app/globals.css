@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  --brand-dark: #0d1117;
+  --brand-surface: #161b22;
+  --brand-card: #21262d;
+  --brand-border: #30363d;
+  --brand-teal: #2dd4bf;
+  --brand-teal-dark: #14b8a6;
+  --brand-amber: #f59e0b;
+  --brand-text: #e6edf3;
+  --brand-muted: #8b949e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-dark);
+  color: var(--brand-text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(45, 212, 191, 0.25);
+  color: var(--brand-text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-muted);
+}
+
+/* Category badges */
+.badge-prompt-lab {
+  background-color: rgba(45, 212, 191, 0.15);
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.badge-tool-drop {
+  background-color: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.badge-behind-the-prompt {
+  background-color: rgba(192, 132, 252, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Code block prompt styling */
+pre[class*="language-prompt"] {
+  border-left: 3px solid var(--brand-teal);
+}

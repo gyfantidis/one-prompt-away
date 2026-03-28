@@ -1,0 +1,16 @@
+{
+  "name": "onepromptaway-scripts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx generate-article.ts",
+    "generate:video": "tsx generate-video.ts",
+    "publish:social": "tsx publish-social.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
