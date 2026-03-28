@@ -15,7 +15,7 @@ interface ArticleMeta {
 }
 
 function getArticles(): ArticleMeta[] {
-  const articlesDir = path.join(process.cwd(), "..", "content", "articles");
+  const articlesDir = path.join(process.cwd(), "content", "articles");
 
   if (!fs.existsSync(articlesDir)) return [];
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
 
-const articlesDir = path.join(process.cwd(), "..", "content", "articles");
+const articlesDir = path.join(process.cwd(), "content", "articles");
 
 export async function generateStaticParams() {
   if (!fs.existsSync(articlesDir)) return [];
