@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_FILE_PATH\"; if [[ \"$FILE\" == *.mdx ]] && [[ \"$FILE\" == *articles* ]]; then echo \"[Hook] Validating article frontmatter...\"; if ! head -50 \"$FILE\" | grep -q \"^title:\"; then echo \"WARNING: Missing title in frontmatter\"; fi; if ! head -50 \"$FILE\" | grep -q \"^description:\"; then echo \"WARNING: Missing description in frontmatter\"; fi; if ! head -50 \"$FILE\" | grep -q \"^category:\"; then echo \"WARNING: Missing category in frontmatter\"; fi; if ! head -50 \"$FILE\" | grep -q \"^tags:\"; then echo \"WARNING: Missing tags in frontmatter\"; fi; if ! head -50 \"$FILE\" | grep -q \"^date:\"; then echo \"WARNING: Missing date in frontmatter\"; fi; echo \"[Hook] Article validation complete.\"; fi'"
+          }
+        ]
+      }
+    ]    
+  }
+}
