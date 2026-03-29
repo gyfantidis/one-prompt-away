@@ -7,7 +7,7 @@
  * Usage: npx tsx scripts/generate-video.ts "article-slug"
  * Example: npx tsx scripts/generate-video.ts "5-prompts-emails"
  */
-
+import "dotenv/config";
 import * as fs from "fs";
 import * as path from "path";
 import { execSync } from "child_process";

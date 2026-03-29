@@ -1,0 +1,13 @@
+{
+  "hook": "Αν φτιάχνεις CV με το χέρι το 2026... χάνεις χρόνο.",
+  "steps": [
+    "Δώσε το job description 📋",
+    "Γράψε το prompt ✍️",
+    "Βελτίωσε το summary 🔥"
+  ],
+  "prompt": "Είμαι [επάγγελμα], [χρόνια εμπειρία]. Φτιάξε μου CV για αυτή τη θέση. Τόνισε [3 skills μου].",
+  "result": "Έτοιμο CV με keywords σε 5 λεπτά ⚡",
+  "cta": "Prompt στο bio. Follow @onepromptaway 👉",
+  "category": "prompt-lab",
+  "brandTag": "@onepromptaway"
+}
