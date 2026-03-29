@@ -1,3 +1,8 @@
+---
+name: generate-article
+description: Generate a complete MDX article for One Prompt Away
+---
+
 # Skill: Generate OPA Article
 
 ## Trigger

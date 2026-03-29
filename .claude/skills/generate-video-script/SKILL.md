@@ -1,3 +1,8 @@
+---
+name: generate-video-script
+description: Generate a 60-second TikTok/Reels video script for One Prompt Away
+---
+
 # Skill: Generate TikTok/Reels Script
 
 ## Trigger

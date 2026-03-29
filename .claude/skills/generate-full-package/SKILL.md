@@ -1,3 +1,8 @@
+---
+name: generate-full-package
+description: Generate a complete content package for One Prompt Away — article, video script, social captions, and image prompts
+---
+
 # Skill: Generate Full Content Package
 
 ## Trigger

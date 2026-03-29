@@ -1,3 +1,8 @@
+---
+name: generate-social-captions
+description: Generate Instagram and TikTok captions with hashtags for a One Prompt Away article
+---
+
 # Skill: Generate Social Captions
 
 ## Trigger
