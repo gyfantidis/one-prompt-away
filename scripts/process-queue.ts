@@ -23,7 +23,7 @@ interface Queue {
   topics: Topic[];
 }
 
-const queuePath = path.join(process.cwd(), "..", "content", "content-queue.json");
+const queuePath = path.join(process.cwd(), "..", "content", "content-queue-20.json");
 
 function loadQueue(): Queue {
   const raw = fs.readFileSync(queuePath, "utf-8");
@@ -48,10 +48,10 @@ async function main() {
   // Run the generation script
   try {
     execSync(
-      `npx tsx scripts/generate-article.ts "${next.topic}" "${next.category}"`,
+      `npx tsx generate-article.ts "${next.topic}" "${next.category}"`,
       {
         stdio: "inherit",
-        cwd: path.join(process.cwd()),
+        cwd: process.cwd(),
         env: { ...process.env },
       }
     );
