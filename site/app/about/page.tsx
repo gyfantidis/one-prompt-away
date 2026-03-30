@@ -89,7 +89,7 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://tiktok.com/@onepromptaway"
+                href="https://www.tiktok.com/@oneprompt.gr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-brand-teal text-brand-dark font-semibold text-sm rounded-lg hover:bg-brand-teal-light transition-colors font-mono"
@@ -97,7 +97,7 @@ export default function AboutPage() {
                 TikTok
               </a>
               <a
-                href="https://instagram.com/onepromptaway"
+                href="https://www.instagram.com/oneprompt.gr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 border border-brand-border text-brand-text text-sm rounded-lg hover:border-brand-muted transition-colors font-mono"

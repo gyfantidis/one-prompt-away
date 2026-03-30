@@ -9,7 +9,7 @@ export default function Footer() {
         </div>
         <div className="flex items-center gap-6 text-sm text-brand-muted">
           <a
-            href="https://tiktok.com/@onepromptaway"
+            href="https://www.tiktok.com/@oneprompt.gr"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-brand-text transition-colors"
@@ -17,7 +17,7 @@ export default function Footer() {
             TikTok
           </a>
           <a
-            href="https://instagram.com/onepromptaway"
+            href="https://www.instagram.com/oneprompt.gr/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-brand-text transition-colors"

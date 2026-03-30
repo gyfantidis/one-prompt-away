@@ -2,8 +2,10 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
+import { Clock } from "lucide-react";
 import Nav from "@/components/Nav";
 import { categoryLabels } from "@/lib/categories";
+import { pillars } from "@/lib/pillars";
 
 interface ArticleMeta {
   title: string;
@@ -34,8 +36,16 @@ function getArticles(): ArticleMeta[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export default function ArticlesPage() {
-  const articles = getArticles();
+export default function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
+  const allArticles = getArticles();
+  const activeCategory = searchParams.category ?? null;
+  const articles = activeCategory
+    ? allArticles.filter((a) => a.category === activeCategory)
+    : allArticles;
 
   return (
     <main className="min-h-screen">
@@ -44,15 +54,42 @@ export default function ArticlesPage() {
       <section className="pt-28 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
           <h1 className="font-mono font-bold text-3xl mb-4">Άρθρα</h1>
-          <p className="text-brand-muted mb-10">
+          <p className="text-brand-muted mb-8">
             Πρακτικοί οδηγοί για AI tools και prompts. Κάθε εβδομάδα κάτι
             καινούριο.
           </p>
 
+          {/* Category filters */}
+          <div className="flex flex-wrap gap-2 mb-10">
+            <Link
+              href="/articles"
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold border transition-colors ${
+                !activeCategory
+                  ? "bg-brand-teal text-brand-dark border-brand-teal"
+                  : "text-brand-muted border-brand-border hover:border-brand-muted"
+              }`}
+            >
+              Όλα
+            </Link>
+            {pillars.map((pillar) => (
+              <Link
+                key={pillar.slug}
+                href={`/articles?category=${pillar.slug}`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold border transition-colors ${
+                  activeCategory === pillar.slug
+                    ? `${categoryLabels[pillar.slug].class} border-current`
+                    : "text-brand-muted border-brand-border hover:border-brand-muted"
+                }`}
+              >
+                {pillar.name}
+              </Link>
+            ))}
+          </div>
+
           {articles.length === 0 ? (
             <div className="bg-brand-surface border border-brand-border rounded-xl p-10 text-center">
               <p className="text-brand-muted font-mono">
-                Σύντομα το πρώτο article...
+                Δεν υπάρχουν άρθρα σε αυτή την κατηγορία ακόμα.
               </p>
               <p className="text-brand-muted/50 text-sm mt-2">
                 Ένα prompt σε χωρίζει.
@@ -77,8 +114,9 @@ export default function ArticlesPage() {
                       >
                         {cat.label}
                       </span>
-                      <span className="text-xs text-brand-muted font-mono">
-                        {article.readingTime}
+                      <span className="flex items-center gap-1 text-xs text-brand-muted font-mono">
+                        <Clock className="w-3 h-3" />
+                        {article.readingTime} ανάγνωση
                       </span>
                     </div>
                     <h2 className="font-mono font-bold text-lg mb-2 group-hover:text-brand-teal transition-colors">
