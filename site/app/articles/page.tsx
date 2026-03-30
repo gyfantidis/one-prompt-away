@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import Nav from "@/components/Nav";
+import { categoryLabels } from "@/lib/categories";
 
 interface ArticleMeta {
   title: string;
@@ -33,35 +34,12 @@ function getArticles(): ArticleMeta[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-const categoryLabels: Record<string, { label: string; class: string }> = {
-  "prompt-lab": { label: "Prompt Lab", class: "badge-prompt-lab" },
-  "tool-drop": { label: "Tool Drop", class: "badge-tool-drop" },
-  "behind-the-prompt": { label: "Behind the Prompt", class: "badge-behind-the-prompt" },
-};
-
 export default function ArticlesPage() {
   const articles = getArticles();
 
   return (
     <main className="min-h-screen">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-mono font-bold text-lg">
-            <span className="text-brand-muted">&gt; </span>
-            <span className="text-brand-text">One</span>
-            <span className="text-brand-teal">Prompt</span>
-            <span className="text-brand-text">Away</span>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-brand-muted hover:text-brand-text transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Αρχική
-          </Link>
-        </div>
-      </nav>
+      <Nav backHref="/" backLabel="Αρχική" />
 
       <section className="pt-28 pb-20 px-6">
         <div className="max-w-3xl mx-auto">

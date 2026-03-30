@@ -1,64 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Zap, Wrench, Brain } from "lucide-react";
-
-const pillars = [
-  {
-    name: "Prompt Lab",
-    slug: "prompt-lab",
-    description: "Πρόβλημα → prompt λύση. Πρακτικό, copy-paste ready.",
-    icon: Zap,
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-    border: "border-brand-teal/30",
-  },
-  {
-    name: "Tool Drop",
-    slug: "tool-drop",
-    description: "AI tool reviews. Quick, opinionated, hands-on.",
-    icon: Wrench,
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/30",
-  },
-  {
-    name: "Behind the Prompt",
-    slug: "behind-the-prompt",
-    description: "Deep dives σε prompting techniques και mental models.",
-    icon: Brain,
-    color: "text-purple-400",
-    bg: "bg-purple-400/10",
-    border: "border-purple-400/30",
-  },
-];
+import { ArrowRight } from "lucide-react";
+import Nav from "@/components/Nav";
+import { pillars } from "@/lib/pillars";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-mono font-bold text-lg">
-            <span className="text-brand-muted">&gt; </span>
-            <span className="text-brand-text">One</span>
-            <span className="text-brand-teal">Prompt</span>
-            <span className="text-brand-text">Away</span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/articles"
-              className="text-sm text-brand-muted hover:text-brand-text transition-colors"
-            >
-              Άρθρα
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm text-brand-muted hover:text-brand-text transition-colors"
-            >
-              Σχετικά
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6">
@@ -151,7 +99,7 @@ export default function Home() {
                   {pillar.name}
                 </h3>
                 <p className="text-sm text-brand-muted leading-relaxed">
-                  {pillar.description}
+                  {pillar.shortDescription}
                 </p>
               </div>
             ))}
@@ -183,35 +131,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-brand-border px-6 py-10">
-        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="font-mono text-sm text-brand-muted">
-            <span className="text-brand-muted">&gt; </span>
-            One<span className="text-brand-teal">Prompt</span>Away
-            <span className="ml-2 text-brand-muted/50">© 2026</span>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-brand-muted">
-            <a
-              href="https://tiktok.com/@onepromptaway"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-brand-text transition-colors"
-            >
-              TikTok
-            </a>
-            <a
-              href="https://instagram.com/onepromptaway"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-brand-text transition-colors"
-            >
-              Instagram
-            </a>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

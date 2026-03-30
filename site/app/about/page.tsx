@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowLeft, Zap, Wrench, Brain } from "lucide-react";
 import { Metadata } from "next";
+import Nav from "@/components/Nav";
+import { pillars } from "@/lib/pillars";
 
 export const metadata: Metadata = {
   title: "Σχετικά",
@@ -8,57 +9,10 @@ export const metadata: Metadata = {
     "Τι είναι το One Prompt Away, ποιος το φτιάχνει και γιατί. Πρακτικοί οδηγοί για AI tools και prompts στα ελληνικά.",
 };
 
-const pillars = [
-  {
-    name: "Prompt Lab",
-    description:
-      "Πραγματικά προβλήματα, πραγματικές λύσεις. Κάθε άρθρο έχει prompt που μπορείς να κάνεις copy-paste αμέσως.",
-    icon: Zap,
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-    border: "border-brand-teal/30",
-  },
-  {
-    name: "Tool Drop",
-    description:
-      "Δοκιμάζω AI tools και σου λέω αν αξίζει ο χρόνος σου. Χωρίς hype, χωρίς affiliate links.",
-    icon: Wrench,
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/30",
-  },
-  {
-    name: "Behind the Prompt",
-    description:
-      "Πώς δουλεύει το prompting στ' αλήθεια. Mental models και τεχνικές που κάνουν τη διαφορά.",
-    icon: Brain,
-    color: "text-purple-400",
-    bg: "bg-purple-400/10",
-    border: "border-purple-400/30",
-  },
-];
-
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-mono font-bold text-lg">
-            <span className="text-brand-muted">&gt; </span>
-            <span className="text-brand-text">One</span>
-            <span className="text-brand-teal">Prompt</span>
-            <span className="text-brand-text">Away</span>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-brand-muted hover:text-brand-text transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Αρχική
-          </Link>
-        </div>
-      </nav>
+      <Nav backHref="/" backLabel="Αρχική" />
 
       <section className="pt-28 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
@@ -116,7 +70,7 @@ export default function AboutPage() {
                       {pillar.name}
                     </p>
                     <p className="text-brand-muted text-sm leading-relaxed">
-                      {pillar.description}
+                      {pillar.longDescription}
                     </p>
                   </div>
                 </div>

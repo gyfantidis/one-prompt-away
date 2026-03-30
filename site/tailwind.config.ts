@@ -25,13 +25,13 @@ const config: Config = {
       },
       fontFamily: {
         mono: [
-          "JetBrains Mono",
+          "var(--font-mono)",
           "Fira Code",
           "SF Mono",
           "monospace",
         ],
         sans: [
-          "Inter",
+          "var(--font-sans)",
           "system-ui",
           "-apple-system",
           "sans-serif",
