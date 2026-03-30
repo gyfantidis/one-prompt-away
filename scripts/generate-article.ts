@@ -142,9 +142,10 @@ async function saveContent(content: ContentPackage): Promise<void> {
   const contentDir = path.join(process.cwd(), "..", "content");
   const articlesDir = path.join(contentDir, "articles");
   const draftsDir = path.join(contentDir, "drafts");
+  const siteArticlesDir = path.join(process.cwd(), "..", "site", "content", "articles");
 
   // Ensure directories exist
-  [articlesDir, draftsDir].forEach((dir) => {
+  [articlesDir, draftsDir, siteArticlesDir].forEach((dir) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   });
 
@@ -152,6 +153,11 @@ async function saveContent(content: ContentPackage): Promise<void> {
   const articlePath = path.join(articlesDir, `${content.slug}.mdx`);
   fs.writeFileSync(articlePath, content.article, "utf-8");
   console.log("📝 Article saved:", articlePath);
+
+  // Mirror to site/content/articles
+  const siteArticlePath = path.join(siteArticlesDir, `${content.slug}.mdx`);
+  fs.writeFileSync(siteArticlePath, content.article, "utf-8");
+  console.log("🌐 Article mirrored:", siteArticlePath);
 
   // Save TikTok script
   const scriptPath = path.join(draftsDir, `${content.slug}-script.md`);
