@@ -6,7 +6,7 @@
  * 
  * To enable:
  * 1. Create Plausible account (or self-host)
- * 2. Add your domain: onepromptaway.gr
+ * 2. Add your domain: oneprompt.gr
  * 3. Set NEXT_PUBLIC_PLAUSIBLE_DOMAIN in .env
  * 
  * Alternative: Umami (https://umami.is) — also privacy-friendly, self-hostable.

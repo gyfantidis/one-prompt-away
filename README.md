@@ -44,7 +44,7 @@ gh workflow run content-pipeline.yml -f topic="Your topic" -f category="prompt-l
 
 ## Brand
 
-- **Domain**: onepromptaway.gr
+- **Domain**: oneprompt.gr
 - **Colors**: Dark (#0D1117) + Teal (#2DD4BF) + Amber (#F59E0B)
 - **Typography**: JetBrains Mono (headings) + Inter (body)
 - **Assets**: Canva folder "One Prompt Away - Brand Assets"

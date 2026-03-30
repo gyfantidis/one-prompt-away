@@ -1,0 +1,13 @@
+{
+  "hook": "Αυτό το prompt μου έφερε 50+ LinkedIn connections!",
+  "steps": [
+    "Άνοιξε το ChatGPT",
+    "Γράψε το 3-line prompt",
+    "Post στο LinkedIn"
+  ],
+  "prompt": "Γράψε LinkedIn post για [topic] που: 1. Controversial opinion 2. 3 examples 3. Actionable question",
+  "result": "50+ νέες συνδέσεις σε μια εβδομάδα",
+  "cta": "Δοκίμασέ το και στείλε screenshot!",
+  "category": "prompt-lab",
+  "brandTag": "@onepromptaway"
+}

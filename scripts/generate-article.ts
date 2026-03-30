@@ -27,7 +27,7 @@ interface ContentPackage {
   title: string;
 }
 
-const SYSTEM_PROMPT = `Είσαι ο content engine του One Prompt Away (onepromptaway.gr), ένα Ελληνικό brand για AI tools και prompts.
+const SYSTEM_PROMPT = `Είσαι ο content engine του One Prompt Away (oneprompt.gr), ένα Ελληνικό brand για AI tools και prompts.
 
 ## Brand Voice
 - Πρώτο πρόσωπο, casual Ελληνικά ("Δοκίμασα αυτό...", "Βρήκα ότι...")

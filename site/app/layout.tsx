@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   description:
     "Ανακάλυψε τα AI tools και prompts που θα αλλάξουν τον τρόπο που δουλεύεις. Πρακτικοί οδηγοί στα Ελληνικά.",
   metadataBase: new URL("https://onepromptaway.gr"),
+  icons: {
+    icon: "/logo-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "el_GR",

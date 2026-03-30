@@ -2,7 +2,7 @@
 
 ## Brand Overview
 
-**One Prompt Away** (onepromptaway.gr) is a Greek-language content brand about AI tools and prompts.
+**One Prompt Away** (oneprompt.gr) is a Greek-language content brand about AI tools and prompts.
 Tagline: "Ένα prompt σε χωρίζει."
 
 Target audience: Greeks 22–40 who want to use AI practically — marketers, students, freelancers, small business owners. Not necessarily developers.
