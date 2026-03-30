@@ -1,0 +1,82 @@
+name: Weekly Content Publish
+
+# Τρέχει κάθε Δευτέρα στις 9:00 πρωί ώρα Αθήνας (UTC+3 = 06:00 UTC)
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Override topic (leave empty for next from queue)'
+        required: false
+        type: string
+      category:
+        description: 'Content category'
+        required: false
+        type: choice
+        options:
+          - auto
+          - prompt-lab
+          - tool-drop
+          - behind-the-prompt
+
+env:
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install script dependencies
+        working-directory: scripts
+        run: npm ci || npm install
+
+      - name: Generate article
+        working-directory: scripts
+        run: |
+          if [ -n "${{ inputs.topic }}" ] && [ "${{ inputs.topic }}" != "" ]; then
+            CATEGORY="${{ inputs.category }}"
+            if [ "$CATEGORY" = "auto" ] || [ -z "$CATEGORY" ]; then
+              CATEGORY="prompt-lab"
+            fi
+            echo "📝 Manual topic: ${{ inputs.topic }}"
+            npx tsx generate-article.ts "${{ inputs.topic }}" "$CATEGORY"
+          else
+            echo "📋 Processing next from queue..."
+            npx tsx process-queue.ts
+          fi
+
+      - name: Commit new content
+        run: |
+          git config user.name "OPA Bot"
+          git config user.email "bot@oneprompt.gr"
+          git add -A
+          CHANGES=$(git diff --cached --name-only)
+          if [ -n "$CHANGES" ]; then
+            echo "📦 New files:"
+            echo "$CHANGES"
+            git commit -m "feat: weekly article publish [automated]"
+            git push
+            echo "✅ Content published and pushed!"
+          else
+            echo "⚠️ No new content generated"
+            exit 0
+          fi
+
+      - name: Summary
+        run: |
+          echo "## 📰 Weekly Content Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "New content has been generated and deployed." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View site](https://oneprompt.gr/articles)" >> $GITHUB_STEP_SUMMARY
