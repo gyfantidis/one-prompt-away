@@ -23,14 +23,14 @@ export const metadata: Metadata = {
   },
   description:
     "Ανακάλυψε τα AI tools και prompts που θα αλλάξουν τον τρόπο που δουλεύεις. Πρακτικοί οδηγοί στα Ελληνικά.",
-  metadataBase: new URL("https://onepromptaway.gr"),
+  metadataBase: new URL("https://oneprompt.gr"),
   icons: {
     icon: "/logo-icon.png",
   },
   openGraph: {
     type: "website",
     locale: "el_GR",
-    url: "https://onepromptaway.gr",
+    url: "https://oneprompt.gr",
     siteName: "One Prompt Away",
     title: "One Prompt Away — Ένα prompt σε χωρίζει",
     description:
