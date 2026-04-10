@@ -4,6 +4,7 @@ node_modules/
 # Next.js
 site/.next/
 site/out/
+site/tsconfig.tsbuildinfo
 
 # Environment variables
 .env
