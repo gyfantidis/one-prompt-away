@@ -1,18 +1,38 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { Metadata } from "next";
 import Nav from "@/components/Nav";
 import { pillars } from "@/lib/pillars";
+import { getTranslations, isValidLocale, defaultLocale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Σχετικά",
-  description:
-    "Τι είναι το One Prompt Away, ποιος το φτιάχνει και γιατί. Πρακτικοί οδηγοί για AI tools και prompts στα ελληνικά.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const locale: Locale = isValidLocale(params.locale)
+    ? params.locale
+    : defaultLocale;
+  const t = getTranslations(locale);
+  return {
+    title: t.about.metaTitle,
+    description: t.about.metaDesc,
+  };
+}
 
-export default function AboutPage() {
+export default function AboutPage({ params }: { params: { locale: string } }) {
+  const locale: Locale = isValidLocale(params.locale)
+    ? params.locale
+    : defaultLocale;
+  const t = getTranslations(locale);
+
   return (
     <main className="min-h-screen">
-      <Nav backHref="/" backLabel="Αρχική" />
+      <Nav
+        locale={locale}
+        backHref={`/${locale}`}
+        backLabel={t.nav.backHome}
+      />
 
       <section className="pt-28 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
@@ -20,57 +40,49 @@ export default function AboutPage() {
           {/* Header */}
           <div className="mb-12">
             <p className="font-mono text-brand-teal text-sm mb-3">
-              &gt; whoami
+              {t.about.whoami}
             </p>
             <h1 className="font-mono font-bold text-3xl md:text-4xl mb-6">
-              Σχετικά με το{" "}
+              {t.about.title}{" "}
               <span className="text-brand-teal">One Prompt Away</span>
             </h1>
             <p className="text-brand-muted text-lg leading-relaxed">
-              Ένα ελληνικό blog για όσους θέλουν να χρησιμοποιούν τα AI tools
-              σωστά — όχι θεωρητικά, αλλά στην πράξη.
+              {t.about.intro}
             </p>
           </div>
 
           {/* About text */}
           <div className="bg-brand-surface border border-brand-border rounded-xl p-8 mb-8 space-y-4">
-            <p className="text-brand-text leading-relaxed">
-              Βρίσκομαι στα AI tools κάθε μέρα — δοκιμάζω, σπάω πράγματα,
-              βρίσκω τι δουλεύει. Το One Prompt Away είναι ο τρόπος μου να
-              μοιράζομαι αυτά που μαθαίνω, στα ελληνικά, χωρίς υπερβολές.
-            </p>
-            <p className="text-brand-text leading-relaxed">
-              Δεν χρειάζεται να είσαι developer για να βγάλεις αποτέλεσμα από
-              το ChatGPT, το Claude ή οποιοδήποτε AI tool. Χρειάζεσαι τον
-              σωστό τρόπο να ρωτάς. Αυτό ακριβώς διδάσκει κάθε άρθρο εδώ.
-            </p>
-            <p className="text-brand-text leading-relaxed">
-              Κάθε post έχει κάτι που μπορείς να χρησιμοποιήσεις σήμερα —
-              prompt, workflow, ή ιδέα. Όχι θεωρία για το μέλλον του AI.
-            </p>
+            <p className="text-brand-text leading-relaxed">{t.about.p1}</p>
+            <p className="text-brand-text leading-relaxed">{t.about.p2}</p>
+            <p className="text-brand-text leading-relaxed">{t.about.p3}</p>
           </div>
 
           {/* Pillars */}
           <h2 className="font-mono font-bold text-xl mb-5">
-            Τι θα βρεις εδώ
+            {t.about.pillarsTitle}
           </h2>
           <div className="flex flex-col gap-4 mb-12">
             {pillars.map((pillar) => {
               const Icon = pillar.icon;
+              const pillarT =
+                t.pillars[pillar.slug as keyof typeof t.pillars];
               return (
                 <div
-                  key={pillar.name}
+                  key={pillar.slug}
                   className={`flex gap-4 p-5 rounded-xl border ${pillar.bg} ${pillar.border}`}
                 >
                   <div className={`mt-0.5 ${pillar.color}`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className={`font-mono font-semibold text-sm mb-1 ${pillar.color}`}>
+                    <p
+                      className={`font-mono font-semibold text-sm mb-1 ${pillar.color}`}
+                    >
                       {pillar.name}
                     </p>
                     <p className="text-brand-muted text-sm leading-relaxed">
-                      {pillar.longDescription}
+                      {pillarT.longDescription}
                     </p>
                   </div>
                 </div>
@@ -81,11 +93,10 @@ export default function AboutPage() {
           {/* Contact / Social */}
           <div className="bg-brand-surface border border-brand-border rounded-xl p-8">
             <h2 className="font-mono font-bold text-lg mb-2">
-              Βρες με εδώ
+              {t.about.contactTitle}
             </h2>
             <p className="text-brand-muted text-sm mb-6">
-              Δημοσιεύω νέο content κάθε εβδομάδα. Follow για να μην χάνεις
-              τίποτα.
+              {t.about.contactText}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -105,10 +116,10 @@ export default function AboutPage() {
                 Instagram
               </a>
               <Link
-                href="/articles"
+                href={`/${locale}/articles`}
                 className="px-4 py-2 border border-brand-border text-brand-text text-sm rounded-lg hover:border-brand-muted transition-colors font-mono"
               >
-                Άρθρα
+                {t.about.articlesLink}
               </Link>
             </div>
           </div>

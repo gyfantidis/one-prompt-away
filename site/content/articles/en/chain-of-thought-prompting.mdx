@@ -1,0 +1,97 @@
+---
+title: "Chain of Thought: The Technique That Makes AI Actually Think"
+description: "Why AI gives wrong answers — and how one simple phrase in your prompt doubles the quality of results."
+date: "2026-04-05"
+category: "behind-the-prompt"
+tags: ["chain-of-thought", "prompting", "technique", "chatgpt"]
+hero: "/images/articles/chain-of-thought-prompting-hero.webp"
+readingTime: "5 min"
+---
+
+I asked ChatGPT a math problem. It gave me the wrong answer with complete confidence.
+
+I added three words to the prompt. It gave me the right answer.
+
+Those three words: **"Think step by step."**
+
+## Why AI Makes Mistakes
+
+Language models don't "think" — they generate tokens based on probability. When you ask something complex and expect an immediate answer, the model "guesses" the answer instead of working through it step by step.
+
+The result: sounds-right-but-is-wrong.
+
+## What Chain of Thought Is
+
+Chain of Thought (CoT) prompting is a technique that forces the AI to show its reasoning before giving an answer. Instead of jumping to a conclusion, it walks through intermediate steps.
+
+It's like telling someone "show your work" — the process leads to a better result.
+
+## How to Apply It
+
+**Basic version — just ask for it:**
+
+```prompt
+[Your question]
+
+Think step by step.
+```
+
+That simple. This phrase alone significantly improves accuracy on logical and mathematical problems.
+
+**More powerful version — give it an example structure:**
+
+```prompt
+I want you to analyze whether a business idea is viable.
+
+Think through it like this:
+1. What problem does it solve?
+2. Who is the target market and how large is it?
+3. What competition exists?
+4. What is the revenue model?
+5. What are the top 3 risks?
+
+Idea: [YOUR IDEA]
+```
+
+Here you're not just asking "think step by step" — you're defining the steps yourself. The output is much more structured.
+
+**For decisions:**
+
+```prompt
+I need to decide whether to [DECISION].
+
+Before giving a recommendation:
+1. Analyze the pros
+2. Analyze the cons
+3. What information is missing for a good decision?
+4. Give your recommendation with reasoning
+
+Context: [YOUR DETAILS]
+```
+
+## When to Use It
+
+Chain of Thought especially helps with:
+
+- **Math and logic problems** — the most classic use case
+- **Situation analysis** — business decisions, comparisons, evaluations
+- **Debugging** — "find the problem step by step"
+- **Structured writing** — when you want structured output, not just prose
+
+You don't need it for simple requests like "translate this" or "write an email". That's overkill.
+
+## The Example That Convinced Me
+
+I asked: *"I have €10,000 and want to invest it. What should I do?"*
+
+Without CoT: I got a generic list of investment options. Useless.
+
+With CoT: *"Before I give a recommendation, let me ask: what is your time horizon, risk tolerance, do you already have an emergency fund, and do you have any high-interest debt?"*
+
+The second answer was exactly what a good financial advisor would say.
+
+## Takeaway
+
+Add "Think step by step" to the end of any complex question. For even better results, define the steps yourself. The difference in answer quality is immediate and noticeable.
+
+It doesn't change the AI — it changes how you ask it to think.

@@ -1,0 +1,64 @@
+---
+title: "Claude Code: Ο AI programmer που δεν ήξερα ότι χρειαζόμουν"
+description: "Δοκίμασα το Claude Code για δύο εβδομάδες. Δεν γράφω πλέον κώδικα χωρίς αυτό. Τι κάνει διαφορετικά από τα υπόλοιπα AI tools."
+date: "2026-04-02"
+category: "tool-drop"
+tags: ["claude-code", "ai-coding", "developer-tools", "anthropic"]
+hero: "/images/articles/claude-code-ai-pair-programmer-hero.webp"
+readingTime: "4 λεπτά"
+---
+
+Είχα ήδη Cursor. Είχα GitHub Copilot. Σκέφτηκα: γιατί να δοκιμάσω άλλο ένα AI coding tool;
+
+Δύο εβδομάδες μετά, το Claude Code είναι το μόνο που έχω ανοιχτό.
+
+## Τι είναι το Claude Code
+
+Το Claude Code δεν είναι autocomplete tool. Είναι CLI agent — τρέχει στο terminal, διαβάζει ολόκληρο το codebase σου, γράφει κώδικα, τρέχει tests, κάνει commits. Δουλεύει με ολόκληρο το project, όχι με ένα αρχείο κάθε φορά.
+
+Η διαφορά είναι θεμελιώδης.
+
+## Τι το κάνει διαφορετικό
+
+**Βλέπει ολόκληρο το project.** Δεν χρειάζεται να copy-paste κώδικα στο chat. Ανοίγεις το terminal, τρέχεις `claude`, και αρχίζεις να μιλάς. Ξέρει τη δομή σου, τα dependencies σου, τα conventions σου.
+
+**Εκτελεί, δεν προτείνει.** Άλλα tools σου δείχνουν τι να γράψεις. Το Claude Code το γράφει, το τρέχει, βλέπει αν δουλεύει, και το διορθώνει μόνο του αν χρειαστεί.
+
+**Εξηγεί τι κάνει.** Κάθε αλλαγή έρχεται με εξήγηση. Δεν απλώς αλλάζει κώδικα — σου λέει γιατί.
+
+## Πώς το χρησιμοποιώ
+
+Το πιο χρήσιμο use case μου μέχρι τώρα: refactoring.
+
+```prompt
+Look at the authentication module. It has repeated validation logic in 4 different files. Consolidate this into a single utility function, update all the imports, and make sure the existing tests still pass.
+```
+
+Σε 3 λεπτά είχε:
+- Βρει και τα 4 αρχεία
+- Δημιουργήσει το utility function
+- Ενημερώσει όλα τα imports
+- Τρέξει τα tests
+- Στείλει commit με descriptive message
+
+Αυτό μου παίρνει κανονικά 45 λεπτά.
+
+**Για bug fixing:**
+
+```prompt
+The user session expires unexpectedly after login. Start from the auth middleware and trace through the session handling to find what's causing early expiration.
+```
+
+Δεν του λες πού να κοιτάξει — το βρίσκει μόνο του.
+
+## Που δεν είναι τέλειο
+
+Δεν το χρησιμοποιώ για γρήγορες αλλαγές ενός αρχείου — εκεί το Cursor είναι πιο γρήγορο. Και κάποιες φορές κάνει πολλές αλλαγές ταυτόχρονα που πρέπει να ελέγξεις προσεκτικά πριν κάνεις merge.
+
+Δεν είναι tool για να "κλείσεις τα μάτια και εμπιστευτείς". Είναι tool για να κάνεις τη δουλειά σου 5x πιο γρήγορα — αλλά εσύ παραμένεις υπεύθυνος για τον κώδικα.
+
+## Takeaway
+
+Αν κάνεις οποιαδήποτε μορφή coding — ακόμα και scripts, automation, ή ελαφρύ web dev — δοκίμασε το Claude Code για μια εβδομάδα. Η free tier αρκεί για να καταλάβεις αν ταιριάζει στον τρόπο που δουλεύεις.
+
+Το σημαντικότερο: αρχίζεις με tasks που σε τρομάζουν να ξεκινήσεις. Το Claude Code αφαιρεί την αδράνεια.

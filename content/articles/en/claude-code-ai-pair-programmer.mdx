@@ -1,0 +1,64 @@
+---
+title: "Claude Code: The AI Programmer I Didn't Know I Needed"
+description: "I tried Claude Code for two weeks. I don't write code without it anymore. Here's what it does differently from every other AI tool."
+date: "2026-04-02"
+category: "tool-drop"
+tags: ["claude-code", "ai-coding", "developer-tools", "anthropic"]
+hero: "/images/articles/claude-code-ai-pair-programmer-hero.webp"
+readingTime: "4 min"
+---
+
+I already had Cursor. I already had GitHub Copilot. I thought: why try another AI coding tool?
+
+Two weeks later, Claude Code is the only one I keep open.
+
+## What Claude Code Is
+
+Claude Code is not an autocomplete tool. It's a CLI agent — runs in your terminal, reads your entire codebase, writes code, runs tests, makes commits. It works with your whole project, not one file at a time.
+
+That difference is fundamental.
+
+## What Makes It Different
+
+**It sees the entire project.** No copy-pasting code into a chat window. You open the terminal, run `claude`, and start talking. It knows your structure, your dependencies, your conventions.
+
+**It executes, not just suggests.** Other tools show you what to write. Claude Code writes it, runs it, checks if it works, and fixes it on its own if needed.
+
+**It explains what it does.** Every change comes with an explanation. It doesn't just change code — it tells you why.
+
+## How I Use It
+
+My most useful use case so far: refactoring.
+
+```prompt
+Look at the authentication module. It has repeated validation logic in 4 different files. Consolidate this into a single utility function, update all the imports, and make sure the existing tests still pass.
+```
+
+In 3 minutes it had:
+- Found all 4 files
+- Created the utility function
+- Updated all imports
+- Run the tests
+- Made a commit with a descriptive message
+
+That normally takes me 45 minutes.
+
+**For bug fixing:**
+
+```prompt
+The user session expires unexpectedly after login. Start from the auth middleware and trace through the session handling to find what's causing early expiration.
+```
+
+You don't tell it where to look — it figures it out.
+
+## Where It Falls Short
+
+I don't use it for quick single-file changes — Cursor is faster there. And sometimes it makes many changes at once that you need to review carefully before merging.
+
+It's not a "close your eyes and trust it" tool. It's a tool for getting your work done 5x faster — but you're still responsible for the code.
+
+## Takeaway
+
+If you do any kind of coding — even scripts, automation, or light web dev — try Claude Code for a week. The free tier is enough to understand if it fits the way you work.
+
+The most important thing: start with tasks you've been putting off because they feel daunting. Claude Code removes the inertia.
