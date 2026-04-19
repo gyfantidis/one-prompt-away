@@ -24,6 +24,12 @@ export default function Footer() {
           >
             Instagram
           </a>
+          <a
+            href="mailto:info@oneprompt.gr"
+            className="hover:text-brand-teal transition-colors"
+          >
+            Email us →
+          </a>
         </div>
       </div>
     </footer>

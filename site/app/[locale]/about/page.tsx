@@ -121,6 +121,12 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
               >
                 {t.about.articlesLink}
               </Link>
+              <a
+                href="mailto:info@oneprompt.gr"
+                className="px-4 py-2 border border-brand-teal text-brand-teal text-sm rounded-lg hover:bg-brand-teal hover:text-brand-dark transition-colors font-mono"
+              >
+                info@oneprompt.gr
+              </a>
             </div>
           </div>
 
