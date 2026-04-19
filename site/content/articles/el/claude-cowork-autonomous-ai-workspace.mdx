@@ -1,0 +1,111 @@
+---
+title: "Claude Cowork: Πώς το desktop σου γίνεται αυτόνομος AI συνεργάτης"
+description: "Ανακάλυψε το Claude Cowork και πώς μετατρέπει το desktop σου σε AI workspace που δουλεύει μόνο του. Πρακτικός οδηγός με prompts."
+date: "2026-04-19"
+category: "prompt-lab"
+tags: ["claude","ai-agents","productivity","automation","desktop-ai"]
+hero: "/images/articles/claude-cowork-autonomous-ai-workspace-hero.webp"
+readingTime: "3 λεπτά"
+---
+
+## Τι είναι το Claude Cowork και γιατί αλλάζει τα πάντα
+
+Το Claude Cowork είναι ο νέος τρόπος που η Anthropic φαντάζεται τη συνεργασία ανθρώπου-AI. Αντί να κάθεσαι και να γράφεις prompts συνεχώς, δίνεις στο Claude πρόσβαση στο desktop σου — και το αφήνεις να δουλέψει.
+
+Δοκίμασα το feature για μια εβδομάδα. Spoiler: δεν είναι hype.
+
+## Πώς λειτουργεί στην πράξη
+
+Το Cowork mode ενεργοποιείται μέσα από το Claude desktop app. Όταν το βάλεις σε Cowork, το Claude μπορεί να:
+
+- Ανοίγει και διαβάζει αρχεία στον υπολογιστή σου
+- Τρέχει terminal commands
+- Ψάχνει στο web για context
+- Δημιουργεί νέα αρχεία και folders
+- Επεξεργάζεται documents σε real-time
+
+Ουσιαστικά, του λες "κάνε αυτό" και το κάνει — χωρίς να χρειάζεται να του εξηγείς κάθε βήμα.
+
+## Το prompt που χρησιμοποιώ καθημερινά
+
+Εδώ είναι το setup prompt που δίνω κάθε πρωί:
+
+prompt
+Είσαι ο AI assistant μου για σήμερα σε Cowork mode.
+
+Προτεραιότητες:
+1. Τσέκαρε τον φάκελο ~/Projects/active για pending tasks
+2. Διάβασε το todo.md και πες μου τι έχει προτεραιότητα
+3. Αν βρεις drafts που χρειάζονται editing, κάνε suggestions
+
+Κανόνες:
+- Ρώτα πριν διαγράψεις οτιδήποτε
+- Κράτα log με τι έκανες στο ~/logs/cowork-[date].md
+- Αν κολλήσεις κάπου, πες μου αντί να μαντέψεις
+
+
+## Real use case: Content research
+
+Χθες χρειαζόμουν research για ένα article. Αντί να ψάχνω μόνος μου, έδωσα αυτό:
+
+prompt
+Χρειάζομαι research για article με topic: "AI tools για email marketing το 2026"
+
+Κάνε τα εξής:
+1. Ψάξε για τα top 5 tools που κυκλοφορούν τώρα
+2. Βρες τιμές και key features για κάθε ένα
+3. Δημιούργησε ένα comparison table σε markdown
+4. Σώσε το στο ~/Projects/content/research/email-ai-tools.md
+
+Πηγές: προτίμησε official sites και recent reviews (2025-2026)
+
+
+Σε 4 λεπτά είχα ένα complete research document με links, τιμές, και σύγκριση. Θα μου έπαιρνε 45+ λεπτά manually.
+
+## Τα boundaries που έβαλα
+
+Το Cowork είναι powerful, αλλά χρειάζεται guardrails. Εδώ τι όρισα:
+
+prompt
+Ποτέ μην κάνεις:
+- Access σε ~/Documents/personal
+- Στείλεις emails χωρίς confirmation
+- Τρέξεις commands με sudo
+- Κάνεις changes σε .env files
+
+Πάντα να ρωτάς πριν:
+- Διαγράψεις αρχεία
+- Κάνεις git push
+- Εγκαταστήσεις packages
+
+
+Αυτό το snippet το έχω σε ένα αρχείο `~/.claude/boundaries.md` και το Claude το διαβάζει αυτόματα κάθε session.
+
+## Πότε ΔΕΝ λειτουργεί καλά
+
+Ας είμαστε honest. Το Cowork δεν είναι για όλα:
+
+- **Complex coding projects**: Για debugging, προτιμώ το κλασικό chat mode με context
+- **Sensitive data**: Αν δουλεύεις με client data, σκέψου δύο φορές
+- **Creative writing**: Για πρώτα drafts, το hands-on approach δίνει καλύτερα results
+
+## Tips για να ξεκινήσεις
+
+1. **Ξεκίνα μικρά**: Δώσε του ένα απλό task πρώτα (organize files, summarize documents)
+2. **Διάβασε τα logs**: Κοίτα τι έκανε μετά από κάθε session
+3. **Iterate το setup prompt**: Το δικό μου άλλαξε 6 φορές την πρώτη εβδομάδα
+
+## Actionable takeaway
+
+Αν θες να δοκιμάσεις το Cowork σήμερα, ξεκίνα με αυτό το minimal prompt:
+
+prompt
+Cowork mode: Βοήθησέ με να οργανώσω τον φάκελο Downloads.
+
+Βήματα:
+1. Δες τι αρχεία υπάρχουν
+2. Πρότεινε κατηγορίες για sorting
+3. Περίμενε approval πριν μετακινήσεις οτιδήποτε
+
+
+Δες πώς δουλεύει, και μετά scale up. Το Claude Cowork δεν είναι magic — είναι ένα εργαλείο. Αλλά αν το χρησιμοποιήσεις σωστά, σου δίνει πίσω ώρες κάθε εβδομάδα.
