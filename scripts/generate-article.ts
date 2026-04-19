@@ -1,13 +1,14 @@
 /**
  * generate-article.ts
- * 
- * Generates a complete content package from a topic:
- * 1. MDX article with frontmatter
- * 2. TikTok/Reels script
- * 3. Image generation prompts
- * 
- * Usage: npx tsx scripts/generate-article.ts "topic" "category"
- * Example: npx tsx scripts/generate-article.ts "meal plan με AI" "prompt-lab"
+ *
+ * Generates a bilingual content package from a topic:
+ * 1. Greek MDX article (el)
+ * 2. English MDX article (en)
+ * 3. TikTok/Reels script (Greek)
+ * 4. Image generation prompts
+ *
+ * Usage: npx tsx generate-article.ts "topic" "category"
+ * Example: npx tsx generate-article.ts "meal plan με AI" "prompt-lab"
  */
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -19,15 +20,30 @@ const client = new Anthropic();
 const CATEGORIES = ["prompt-lab", "tool-drop", "behind-the-prompt"] as const;
 type Category = (typeof CATEGORIES)[number];
 
+interface ArticleData {
+  title: string;
+  slug: string;
+  description: string;
+  tags: string[];
+  article_body: string;
+  tiktok_script?: {
+    hook: string;
+    body: string;
+    cta: string;
+  };
+  hero_image_prompt?: string;
+  thumbnail_prompt?: string;
+}
+
 interface ContentPackage {
-  article: string;
+  el: { article: string; data: ArticleData };
+  en: { article: string; data: ArticleData };
   script: string;
   imagePrompts: string;
   slug: string;
-  title: string;
 }
 
-const SYSTEM_PROMPT = `Είσαι ο content engine του One Prompt Away (oneprompt.gr), ένα Ελληνικό brand για AI tools και prompts.
+const SYSTEM_PROMPT_EL = `Είσαι ο content engine του One Prompt Away (oneprompt.gr), ένα Ελληνικό brand για AI tools και prompts.
 
 ## Brand Voice
 - Πρώτο πρόσωπο, casual Ελληνικά ("Δοκίμασα αυτό...", "Βρήκα ότι...")
@@ -39,7 +55,21 @@ const SYSTEM_PROMPT = `Είσαι ο content engine του One Prompt Away (onep
 ## Target Audience
 Έλληνες 22-40: marketers, φοιτητές, freelancers, μικροεπιχειρηματίες. ΟΧΙ developers-only.
 
-Παράγεις content σε τρεις μορφές ταυτόχρονα. Απάντησε ΜΟΝΟ σε JSON format χωρίς markdown backticks.`;
+Απάντησε ΜΟΝΟ σε JSON format χωρίς markdown backticks.`;
+
+const SYSTEM_PROMPT_EN = `You are the content engine for One Prompt Away (oneprompt.gr), a brand about AI tools and prompts.
+
+## Brand Voice
+- First person, casual English ("I tried this...", "I found that...")
+- Tech terms stay as-is (prompt, tool, API — never rephrase)
+- Always end with an actionable takeaway
+- Short sentences, short paragraphs
+- Zero hype, zero unexplained jargon
+
+## Target Audience
+25-40 year olds: marketers, students, freelancers, small business owners. NOT developers-only.
+
+Reply ONLY in JSON format without markdown backticks.`;
 
 function slugify(text: string): string {
   return text
@@ -51,10 +81,22 @@ function slugify(text: string): string {
     .slice(0, 60);
 }
 
-async function generateContent(topic: string, category: Category): Promise<ContentPackage> {
-  const today = new Date().toISOString().split("T")[0];
+function wordCount(text: string): number {
+  return text.split(/\s+/).length;
+}
 
-  const userPrompt = `Topic: "${topic}"
+async function generateForLocale(
+  topic: string,
+  category: Category,
+  locale: "el" | "en",
+  today: string,
+  existingSlug?: string
+): Promise<ArticleData> {
+  const isGreek = locale === "el";
+  const systemPrompt = isGreek ? SYSTEM_PROMPT_EL : SYSTEM_PROMPT_EN;
+
+  const userPrompt = isGreek
+    ? `Topic: "${topic}"
 Category: ${category}
 Date: ${today}
 
@@ -62,7 +104,7 @@ Date: ${today}
 
 {
   "title": "Ελληνικός τίτλος — catchy, practical",
-  "slug": "english-slug-for-url",
+  "slug": "${existingSlug || "english-slug-for-url"}",
   "description": "SEO description, 150-160 chars, Ελληνικά",
   "tags": ["tag1", "tag2", "tag3"],
   "article_body": "Ολόκληρο το article body σε MDX format. Χρησιμοποίησε ## για headings. Βάλε prompts σε \`\`\`prompt code blocks. 600-1000 λέξεις.",
@@ -73,15 +115,28 @@ Date: ${today}
   },
   "hero_image_prompt": "Detailed DALL-E prompt, dark theme, brand colors #0D1117 #2DD4BF, tech aesthetic",
   "thumbnail_prompt": "Square crop version, bold, high contrast, minimal text"
+}`
+    : `Topic: "${topic}"
+Category: ${category}
+Date: ${today}
+Slug (use this exact value): "${existingSlug || ""}"
+
+Generate a complete article. Reply in JSON with this structure:
+
+{
+  "title": "English title — catchy, practical",
+  "slug": "${existingSlug || "english-slug-for-url"}",
+  "description": "SEO description, 150-160 chars, English",
+  "tags": ["tag1", "tag2", "tag3"],
+  "article_body": "Full article body in MDX format. Use ## for headings. Put prompts in \`\`\`prompt code blocks. 600-1000 words."
 }`;
 
-  console.log("🤖 Generating content for:", topic);
-  console.log("📂 Category:", category);
+  console.log(`🌐 Generating ${locale.toUpperCase()} article for: ${topic}`);
 
   const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-opus-4-5",
     max_tokens: 4000,
-    system: SYSTEM_PROMPT,
+    system: systemPrompt,
     messages: [{ role: "user", content: userPrompt }],
   });
 
@@ -90,11 +145,15 @@ Date: ${today}
     .map((block) => block.text)
     .join("");
 
-  // Parse JSON (handle potential markdown wrapping)
   const cleanJson = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-  const data = JSON.parse(cleanJson);
+  return JSON.parse(cleanJson) as ArticleData;
+}
 
-  // Build MDX article
+function buildMdx(data: ArticleData, category: Category, today: string, locale: "el" | "en"): string {
+  const readingTime = locale === "el"
+    ? `${Math.ceil(wordCount(data.article_body) / 200)} λεπτά`
+    : `${Math.ceil(wordCount(data.article_body) / 200)} min`;
+
   const frontmatter = `---
 title: "${data.title}"
 description: "${data.description}"
@@ -102,72 +161,92 @@ date: "${today}"
 category: "${category}"
 tags: ${JSON.stringify(data.tags)}
 hero: "/images/articles/${data.slug}-hero.webp"
-readingTime: "${Math.ceil(data.article_body.split(/\s+/).length / 200)} λεπτά"
+readingTime: "${readingTime}"
 ---`;
 
-  const article = `${frontmatter}\n\n${data.article_body}`;
+  return `${frontmatter}\n\n${data.article_body}`;
+}
 
-  // Build TikTok script
-  const script = `# TikTok/Reels Script: ${data.title}
+async function generateContent(topic: string, category: Category): Promise<ContentPackage> {
+  const today = new Date().toISOString().split("T")[0];
+
+  // Generate Greek first to get the canonical slug
+  const elData = await generateForLocale(topic, category, "el", today);
+  const slug = elData.slug || slugify(elData.title);
+
+  // Generate English using the same slug
+  const enData = await generateForLocale(topic, category, "en", today, slug);
+
+  const elArticle = buildMdx(elData, category, today, "el");
+  const enArticle = buildMdx({ ...enData, slug }, category, today, "en");
+
+  // Build TikTok script from Greek data
+  const script = elData.tiktok_script
+    ? `# TikTok/Reels Script: ${elData.title}
 ## Duration: 60 seconds
 
 ### HOOK (0-3s)
-${data.tiktok_script.hook}
+${elData.tiktok_script.hook}
 
 ### BODY (3-48s)
-${data.tiktok_script.body}
+${elData.tiktok_script.body}
 
 ### CTA (48-60s)
-${data.tiktok_script.cta}`;
+${elData.tiktok_script.cta}`
+    : "";
 
-  // Build image prompts
-  const imagePrompts = `# Image Prompts: ${data.title}
+  const imagePrompts = elData.hero_image_prompt
+    ? `# Image Prompts: ${elData.title}
 
 ## Hero Image (16:9)
-${data.hero_image_prompt}
+${elData.hero_image_prompt}
 
 ## Thumbnail (1:1)
-${data.thumbnail_prompt}`;
+${elData.thumbnail_prompt}`
+    : "";
 
   return {
-    article,
+    el: { article: elArticle, data: elData },
+    en: { article: enArticle, data: { ...enData, slug } },
     script,
     imagePrompts,
-    slug: data.slug || slugify(data.title),
-    title: data.title,
+    slug,
   };
 }
 
 async function saveContent(content: ContentPackage): Promise<void> {
-  const contentDir = path.join(process.cwd(), "..", "content");
-  const articlesDir = path.join(contentDir, "articles");
-  const draftsDir = path.join(contentDir, "drafts");
-  const siteArticlesDir = path.join(process.cwd(), "..", "site", "content", "articles");
+  const root = path.join(process.cwd(), "..");
+  const siteArticlesEl = path.join(root, "site", "content", "articles", "el");
+  const siteArticlesEn = path.join(root, "site", "content", "articles", "en");
+  const draftsDir = path.join(root, "content", "drafts");
 
-  // Ensure directories exist
-  [articlesDir, draftsDir, siteArticlesDir].forEach((dir) => {
+  [siteArticlesEl, siteArticlesEn, draftsDir].forEach((dir) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   });
 
-  // Save article
-  const articlePath = path.join(articlesDir, `${content.slug}.mdx`);
-  fs.writeFileSync(articlePath, content.article, "utf-8");
-  console.log("📝 Article saved:", articlePath);
+  // Save Greek article
+  const elPath = path.join(siteArticlesEl, `${content.slug}.mdx`);
+  fs.writeFileSync(elPath, content.el.article, "utf-8");
+  console.log("📝 Greek article saved:", elPath);
 
-  // Mirror to site/content/articles
-  const siteArticlePath = path.join(siteArticlesDir, `${content.slug}.mdx`);
-  fs.writeFileSync(siteArticlePath, content.article, "utf-8");
-  console.log("🌐 Article mirrored:", siteArticlePath);
+  // Save English article
+  const enPath = path.join(siteArticlesEn, `${content.slug}.mdx`);
+  fs.writeFileSync(enPath, content.en.article, "utf-8");
+  console.log("📝 English article saved:", enPath);
 
   // Save TikTok script
-  const scriptPath = path.join(draftsDir, `${content.slug}-script.md`);
-  fs.writeFileSync(scriptPath, content.script, "utf-8");
-  console.log("🎬 Script saved:", scriptPath);
+  if (content.script) {
+    const scriptPath = path.join(draftsDir, `${content.slug}-script.md`);
+    fs.writeFileSync(scriptPath, content.script, "utf-8");
+    console.log("🎬 Script saved:", scriptPath);
+  }
 
   // Save image prompts
-  const promptsPath = path.join(draftsDir, `${content.slug}-images.md`);
-  fs.writeFileSync(promptsPath, content.imagePrompts, "utf-8");
-  console.log("🖼️  Image prompts saved:", promptsPath);
+  if (content.imagePrompts) {
+    const promptsPath = path.join(draftsDir, `${content.slug}-images.md`);
+    fs.writeFileSync(promptsPath, content.imagePrompts, "utf-8");
+    console.log("🖼️  Image prompts saved:", promptsPath);
+  }
 }
 
 async function main() {
@@ -175,7 +254,7 @@ async function main() {
   const category = (process.argv[3] || "prompt-lab") as Category;
 
   if (!topic || topic === "auto") {
-    console.error("Usage: npx tsx scripts/generate-article.ts \"topic\" \"category\"");
+    console.error('Usage: npx tsx generate-article.ts "topic" "category"');
     console.error("Categories:", CATEGORIES.join(", "));
     process.exit(1);
   }
@@ -186,7 +265,7 @@ async function main() {
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("❌ ANTHROPIC_API_KEY not set. Export it or add to .env");
+    console.error("❌ ANTHROPIC_API_KEY not set");
     process.exit(1);
   }
 
@@ -194,11 +273,11 @@ async function main() {
     const content = await generateContent(topic, category);
     await saveContent(content);
 
-    console.log("\n✅ Content package generated successfully!");
-    console.log(`   Title: ${content.title}`);
+    console.log("\n✅ Bilingual content package generated!");
+    console.log(`   EL: ${content.el.data.title}`);
+    console.log(`   EN: ${content.en.data.title}`);
     console.log(`   Slug: ${content.slug}`);
 
-    // Output slug for GitHub Actions
     if (process.env.GITHUB_OUTPUT) {
       fs.appendFileSync(process.env.GITHUB_OUTPUT, `slug=${content.slug}\n`);
     }

@@ -44,7 +44,7 @@ jobs:
         working-directory: scripts
         run: npm ci || npm install
 
-      - name: Generate article
+      - name: Generate bilingual article (EL + EN)
         working-directory: scripts
         run: |
           if [ -n "${{ inputs.topic }}" ] && [ "${{ inputs.topic }}" != "" ]; then
@@ -78,8 +78,9 @@ jobs:
 
       - name: Summary
         run: |
-          echo "## 📰 Weekly Content Published" >> $GITHUB_STEP_SUMMARY
+          echo "## 📰 Weekly Content Published (EL + EN)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "New content has been generated and deployed." >> $GITHUB_STEP_SUMMARY
+          echo "New bilingual content has been generated and deployed." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View site](https://oneprompt.gr/articles)" >> $GITHUB_STEP_SUMMARY
+          echo "🇬🇷 [Ελληνικά](https://oneprompt.gr/el/articles)" >> $GITHUB_STEP_SUMMARY
+          echo "🇬🇧 [English](https://oneprompt.gr/en/articles)" >> $GITHUB_STEP_SUMMARY
