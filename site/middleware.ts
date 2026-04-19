@@ -12,9 +12,10 @@ function detectLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip Next.js internals, static files, and admin routes
+  // Skip Next.js internals, API routes, static files, and admin routes
   if (
     pathname.startsWith("/_next") ||
+    pathname.startsWith("/api/") ||
     pathname.startsWith("/admin") ||
     pathname.includes(".") // static files (favicon, images, etc.)
   ) {

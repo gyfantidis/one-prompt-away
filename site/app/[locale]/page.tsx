@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import Nav from "@/components/Nav";
+import NewsletterForm from "@/components/NewsletterForm";
 import { pillars } from "@/lib/pillars";
 import { getTranslations, isValidLocale, defaultLocale } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
@@ -209,16 +210,12 @@ export default function Home({ params }: { params: { locale: string } }) {
               {t.home.newsletterTitle}
             </h2>
             <p className="text-brand-muted mb-6">{t.home.newsletterText}</p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder={t.home.newsletterPlaceholder}
-                className="flex-1 px-4 py-3 bg-brand-dark border border-brand-border rounded-lg text-brand-text placeholder:text-brand-muted/50 focus:outline-none focus:border-brand-teal transition-colors"
-              />
-              <button className="px-6 py-3 bg-brand-teal text-brand-dark font-semibold rounded-lg hover:bg-brand-teal-light transition-colors whitespace-nowrap">
-                {t.home.newsletterButton}
-              </button>
-            </div>
+            <NewsletterForm
+              placeholder={t.home.newsletterPlaceholder}
+              buttonText={t.home.newsletterButton}
+              successText={t.home.newsletterSuccess}
+              errorText={t.home.newsletterError}
+            />
           </div>
         </div>
       </section>
