@@ -57,8 +57,8 @@
     {
       "topic": "Γράφω blog post σε 10 λεπτά με αυτό το prompt — και δεν φαίνεται AI-generated",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-05-25"
     },
     {
       "topic": "NotebookLM: Έβαλα 200 σελίδες PDF μέσα — απάντησε σε 3 δευτερόλεπτα",
