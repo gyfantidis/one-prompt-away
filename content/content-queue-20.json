@@ -63,8 +63,8 @@
     {
       "topic": "NotebookLM: Έβαλα 200 σελίδες PDF μέσα — απάντησε σε 3 δευτερόλεπτα",
       "category": "tool-drop",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-01"
     },
     {
       "topic": "Prompt chaining: Πώς λύνω πολύπλοκα προβλήματα με μικρά αλυσιδωτά prompts",
