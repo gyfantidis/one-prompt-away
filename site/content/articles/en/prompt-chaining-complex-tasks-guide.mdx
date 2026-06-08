@@ -1,0 +1,136 @@
+---
+title: "Prompt Chaining: How I Solve Complex Problems with Small, Connected Prompts"
+description: "Learn prompt chaining to break complex AI tasks into simple steps. Real examples and templates for better results with ChatGPT and Claude."
+date: "2026-06-08"
+category: "behind-the-prompt"
+tags: ["prompt-chaining","advanced-prompts","productivity","workflow"]
+hero: "/images/articles/prompt-chaining-complex-tasks-guide-hero.webp"
+readingTime: "4 min"
+---
+
+I used to write massive prompts. Walls of text with every instruction crammed together. The results? Mediocre at best. The AI would nail some parts and completely miss others.
+
+Then I discovered prompt chaining. Instead of one giant prompt, I break tasks into small, focused steps. Each prompt does one thing well. The output of one becomes the input for the next.
+
+Game changer.
+
+## What Is Prompt Chaining?
+
+Prompt chaining is exactly what it sounds like. You create a chain of prompts where each link handles a specific part of a larger task.
+
+Think of it like an assembly line. One worker cuts the fabric. Another sews. Another adds buttons. Each step is simple. The final product is complex.
+
+Same logic applies to AI prompts.
+
+## Why Single Prompts Fail for Complex Tasks
+
+I learned this the hard way. When you ask an AI to do five things at once, it has to split its attention. Quality drops across the board.
+
+Here's what typically happens:
+- The AI forgets instructions halfway through
+- Output quality is uneven
+- You lose control over each step
+- Fixing errors means regenerating everything
+
+Chaining solves all of this.
+
+## A Real Example: Creating a Blog Post
+
+Let me walk you through how I actually use this. Say I need a blog post about remote work productivity.
+
+**Old approach (one massive prompt):**
+
+prompt
+Write a 1000-word blog post about remote work productivity. Include an intro, 5 tips, examples for each tip, a conclusion, meta description, and 3 social media posts to promote it.
+
+
+The result? A generic article with surface-level tips and promotional content that doesn't match the actual post.
+
+**New approach (chained prompts):**
+
+**Chain Link 1 - Research**
+prompt
+List 10 specific, lesser-known challenges remote workers face with productivity. Focus on problems that aren't obvious. One sentence each.
+
+
+**Chain Link 2 - Selection**
+prompt
+From this list, pick the 5 most actionable challenges that would resonate with freelancers and small business owners:
+[paste output from Link 1]
+
+
+**Chain Link 3 - Outline**
+prompt
+Create a blog post outline for these 5 challenges. Each section needs: the problem stated clearly, why it happens, one concrete solution with a specific example.
+[paste output from Link 2]
+
+
+**Chain Link 4 - Draft**
+prompt
+Write the full blog post based on this outline. Casual tone, first person, short paragraphs. 800 words.
+[paste output from Link 3]
+
+
+**Chain Link 5 - Polish**
+prompt
+Review this draft. Fix any awkward sentences. Make sure each tip has a specific, actionable takeaway. Tighten the intro.
+[paste output from Link 4]
+
+
+Each step builds on the previous one. I can review and adjust at any point. The final result is significantly better.
+
+## When to Use Prompt Chaining
+
+Not every task needs this approach. Here's my rule of thumb:
+
+**Use chaining when:**
+- The task has multiple distinct phases
+- Quality matters more than speed
+- You need to review intermediate steps
+- One mistake would ruin the whole output
+
+**Skip chaining when:**
+- The task is straightforward
+- You need quick, rough output
+- You're just brainstorming
+
+## My Go-To Chain Patterns
+
+After months of experimentation, I keep coming back to these patterns:
+
+**The Research Chain:** Gather info → Filter relevant points → Organize → Write
+
+**The Refinement Chain:** Draft → Critique → Revise → Polish
+
+**The Expansion Chain:** Core idea → Add context → Add examples → Add transitions
+
+**The Translation Chain:** Complex input → Simplify → Restructure for audience → Format for platform
+
+## Common Mistakes to Avoid
+
+I've made all of these. Learn from my failures:
+
+1. **Too many links.** More isn't better. 3-5 links is usually the sweet spot.
+
+2. **Vague handoffs.** Be explicit about what you're passing to the next prompt. Don't just say "improve this."
+
+3. **Skipping review.** The whole point is to check each step. If you're not reviewing, just use one prompt.
+
+4. **Inconsistent instructions.** If you want casual tone in the final output, mention it in earlier steps too.
+
+## Tools That Make Chaining Easier
+
+You can chain prompts manually by copy-pasting between chats. That works fine for occasional use.
+
+For regular use, look into:
+- Custom GPTs in ChatGPT (you can build multi-step workflows)
+- Claude's Projects feature (keeps context across conversations)
+- Dedicated tools like Langchain or Flowise (for more technical setups)
+
+## The Takeaway
+
+Start small. Next time you have a complex task, split it into 3 steps instead of one prompt. See the difference in quality. Then expand from there.
+
+Prompt chaining isn't about being clever. It's about giving the AI a fair chance to do each part well. One focused task at a time.
+
+That's how I turned mediocre outputs into actually useful ones.

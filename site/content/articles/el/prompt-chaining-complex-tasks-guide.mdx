@@ -1,0 +1,123 @@
+---
+title: "Prompt Chaining: Πώς Σπάω Πολύπλοκα Tasks σε Μικρά Αλυσιδωτά Prompts"
+description: "Μάθε πώς το prompt chaining μετατρέπει αδύνατα tasks σε απλά βήματα. Πρακτικά παραδείγματα και templates για να ξεκινήσεις σήμερα."
+date: "2026-06-08"
+category: "behind-the-prompt"
+tags: ["prompt-chaining","advanced-prompts","productivity","workflow"]
+hero: "/images/articles/prompt-chaining-complex-tasks-guide-hero.webp"
+readingTime: "3 λεπτά"
+---
+
+## Το Πρόβλημα με τα Μεγάλα Prompts
+
+Πριν λίγο καιρό προσπαθούσα να φτιάξω ένα πλήρες business plan με ένα prompt. Το αποτέλεσμα; Γενικόλογο, αόριστο, άχρηστο.
+
+Το πρόβλημα δεν ήταν το AI. Ήμουν εγώ που ζητούσα τα πάντα μαζί.
+
+## Τι Είναι το Prompt Chaining
+
+Prompt chaining = σπάω ένα μεγάλο task σε μικρά, αλληλένδετα prompts. Κάθε prompt παίρνει το output του προηγούμενου ως input.
+
+Σκέψου το σαν assembly line. Κάθε σταθμός κάνει ΜΙΑ δουλειά καλά.
+
+## Γιατί Δουλεύει Καλύτερα
+
+**1. Καλύτερο focus**: Το AI δεν χάνεται σε πολλαπλές κατευθύνσεις
+
+**2. Εύκολο debugging**: Αν κάτι πάει στραβά, ξέρεις ακριβώς πού
+
+**3. Επαναχρησιμοποίηση**: Κάθε chain link γίνεται reusable component
+
+## Πρακτικό Παράδειγμα: Blog Post Pipeline
+
+Αντί για "Γράψε μου ένα blog post για X", χρησιμοποιώ αυτή την αλυσίδα:
+
+### Chain Link 1: Research & Angles
+
+prompt
+Θέμα: [TOPIC]
+
+Βρες 5 διαφορετικές γωνίες προσέγγισης για αυτό το θέμα.
+Για κάθε γωνία δώσε:
+- Μια πρόταση τίτλου
+- Το target audience
+- Το κύριο takeaway
+
+
+### Chain Link 2: Outline Generation
+
+prompt
+Επέλεξα αυτή τη γωνία: [PASTE CHOSEN ANGLE]
+
+Φτιάξε detailed outline με:
+- Hook για την εισαγωγή
+- 3-4 main sections με subpoints
+- Conclusion με actionable takeaway
+
+
+### Chain Link 3: Section Writing
+
+prompt
+Outline: [PASTE OUTLINE]
+
+Γράψε ΜΟΝΟ την ενότητα [SECTION NAME].
+Style: Conversational, πρώτο πρόσωπο.
+Μήκος: 150-200 λέξεις.
+
+
+### Chain Link 4: Polish & Edit
+
+prompt
+Κείμενο: [PASTE FULL DRAFT]
+
+1. Βρες επαναλήψεις λέξεων και πρότεινε εναλλακτικές
+2. Εντόπισε προτάσεις >25 λέξεις και σπάσε τες
+3. Πρόσθεσε transitions μεταξύ sections
+
+
+## Advanced Tip: Branching Chains
+
+Μερικές φορές χρειάζομαι παράλληλες αλυσίδες. Παράδειγμα για product launch:
+
+**Branch A**: Market Research → Competitor Analysis → Positioning
+
+**Branch B**: Feature List → Benefit Translation → Messaging
+
+**Merge Point**: Τα outputs συναντιούνται σε ένα final prompt που τα συνδυάζει.
+
+## Το Framework που Χρησιμοποιώ
+
+Πριν ξεκινήσω οποιοδήποτε chain, απαντάω σε 3 ερωτήσεις:
+
+1. **Ποιο είναι το τελικό output;** (Συγκεκριμένο, μετρήσιμο)
+2. **Ποια είναι τα dependencies;** (Τι χρειάζεται να υπάρχει πρώτα)
+3. **Πού μπορεί να χρειαστεί human input;** (Αποφάσεις, validation)
+
+## Πότε ΔΕΝ Χρειάζεται Chaining
+
+Όχι τα πάντα θέλουν αλυσίδα. Single prompts δουλεύουν μια χαρά για:
+
+- Απλές μεταφράσεις
+- Quick brainstorming
+- Fact-checking ερωτήσεις
+- Format conversions
+
+Το chaining λάμπει σε creative work, analysis, και multi-step processes.
+
+## Tools που Βοηθάνε
+
+Μπορείς να κάνεις chaining manually (copy-paste), αλλά υπάρχουν και tools:
+
+- **ChatGPT Custom Instructions**: Για consistent context
+- **Notion AI**: Για document-based chains
+- **Zapier + OpenAI**: Για automated chains
+
+Εγώ ξεκίνησα με manual. Μόλις βρεις patterns που επαναλαμβάνονται, τότε αυτοματοποιείς.
+
+## Takeaway
+
+Την επόμενη φορά που ένα prompt δεν δουλεύει, μην το κάνεις μεγαλύτερο. Σπάσε το σε μικρότερα.
+
+Ξεκίνα με 2-3 chain links. Δες τη διαφορά στα αποτελέσματα. Μετά επέκτεινε.
+
+Το AI δεν είναι μάγος που διαβάζει σκέψεις. Είναι εργαλείο που θέλει σαφείς οδηγίες — μία τη φορά.
