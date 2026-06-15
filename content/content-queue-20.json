@@ -75,8 +75,8 @@
     {
       "topic": "Έφτιαξα business plan από το μηδέν σε 4 ώρες — ο επενδυτής δεν πίστευε ότι ήταν AI",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-15"
     },
     {
       "topic": "v0 by Vercel: Έγραψα ένα prompt και πήρα ολόκληρο UI — χωρίς κώδικα",
