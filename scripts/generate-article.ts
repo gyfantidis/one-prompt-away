@@ -31,15 +31,12 @@ interface ArticleData {
     body: string;
     cta: string;
   };
-  hero_image_prompt?: string;
-  thumbnail_prompt?: string;
 }
 
 interface ContentPackage {
   el: { article: string; data: ArticleData };
   en: { article: string; data: ArticleData };
   script: string;
-  imagePrompts: string;
   slug: string;
 }
 
@@ -113,8 +110,7 @@ Date: ${today}
     "body": "Step-by-step demo με [VISUAL DIRECTIONS] σε brackets (3-48s)",
     "cta": "Call to action (48-60s)"
   },
-  "hero_image_prompt": "Detailed DALL-E prompt, dark theme, brand colors #0D1117 #2DD4BF, tech aesthetic",
-  "thumbnail_prompt": "Square crop version, bold, high contrast, minimal text"
+  "tiktok_script_end": true
 }`
     : `Topic: "${topic}"
 Category: ${category}
@@ -160,7 +156,6 @@ description: "${data.description}"
 date: "${today}"
 category: "${category}"
 tags: ${JSON.stringify(data.tags)}
-hero: "/images/articles/${data.slug}-hero.webp"
 readingTime: "${readingTime}"
 ---`;
 
@@ -195,21 +190,10 @@ ${elData.tiktok_script.body}
 ${elData.tiktok_script.cta}`
     : "";
 
-  const imagePrompts = elData.hero_image_prompt
-    ? `# Image Prompts: ${elData.title}
-
-## Hero Image (16:9)
-${elData.hero_image_prompt}
-
-## Thumbnail (1:1)
-${elData.thumbnail_prompt}`
-    : "";
-
   return {
     el: { article: elArticle, data: elData },
     en: { article: enArticle, data: { ...enData, slug } },
     script,
-    imagePrompts,
     slug,
   };
 }
@@ -241,12 +225,6 @@ async function saveContent(content: ContentPackage): Promise<void> {
     console.log("🎬 Script saved:", scriptPath);
   }
 
-  // Save image prompts
-  if (content.imagePrompts) {
-    const promptsPath = path.join(draftsDir, `${content.slug}-images.md`);
-    fs.writeFileSync(promptsPath, content.imagePrompts, "utf-8");
-    console.log("🖼️  Image prompts saved:", promptsPath);
-  }
 }
 
 async function main() {
