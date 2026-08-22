@@ -1,0 +1,103 @@
+---
+title: "Έφτιαξα αυτό το site με AI σε ένα βράδυ — full breakdown, κόστος και λάθη"
+description: "Πώς έφτιαξα ένα πλήρες website σε 6 ώρες χρησιμοποιώντας AI tools. Αναλυτικό breakdown, πραγματικά κόστη και τα λάθη που έκανα."
+date: "2026-07-06"
+category: "prompt-lab"
+tags: ["website building","AI tools","case study","v0","cursor"]
+hero: "/images/articles/ai-website-one-night-breakdown-hero.webp"
+readingTime: "3 λεπτά"
+---
+
+## Η ιδέα στις 10 το βράδυ
+
+Ήταν Τρίτη βράδυ και είχα μια ιδέα για ένα micro-SaaS: ένα tool που μετατρέπει bullet points σε LinkedIn posts. Αντί να το αφήσω για «κάποια στιγμή», αποφάσισα να το φτιάξω εκείνο το βράδυ.
+
+Στις 4 το πρωί, το site ήταν live.
+
+## Τα tools που χρησιμοποίησα
+
+**v0.dev** για το UI design — έδωσα ένα prompt και πήρα React components ready to use.
+
+**Cursor** για τον κώδικα — ουσιαστικά pair programming με AI.
+
+**Supabase** για database και auth — zero configuration.
+
+**Vercel** για hosting — one click deploy.
+
+Συνολικό κόστος εκείνο το βράδυ: €0. Όλα στα free tiers.
+
+## Ώρα 1-2: Το UI με v0
+
+Ξεκίνησα με αυτό το prompt στο v0:
+
+prompt
+Create a modern landing page for a SaaS tool called "BulletToPost". It converts bullet points into LinkedIn posts. Include: hero section with demo input, 3 feature cards, pricing section with 2 tiers (free/pro), dark mode design with teal accents. Use shadcn/ui components.
+
+
+Πήρα ένα πλήρες UI σε 30 δευτερόλεπτα. Έκανα 3-4 iterations για να το φέρω όπως ήθελα.
+
+**Λάθος #1**: Ζήτησα πάρα πολλά features στο πρώτο prompt. Καλύτερα να ξεκινάς minimal και να προσθέτεις.
+
+## Ώρα 2-4: Ο κώδικας με Cursor
+
+Έκανα export τα components από το v0 και τα έβαλα σε ένα Next.js project. Στο Cursor, έγραψα:
+
+prompt
+I need to connect this form to an API that takes bullet points and returns a LinkedIn post. Use OpenAI's API. Store the conversion in Supabase. Add rate limiting: 5 free conversions per day per user.
+
+
+Το Cursor έγραψε το 80% του κώδικα. Εγώ έκανα debugging και μικροδιορθώσεις.
+
+**Λάθος #2**: Δεν είχα φτιάξει το Supabase schema πρώτα. Έχασα 30 λεπτά σε back-and-forth μεταξύ Cursor και Supabase dashboard.
+
+## Ώρα 4-5: Auth και payments
+
+Για authentication χρησιμοποίησα Supabase Auth με Google login. Literally 10 γραμμές κώδικα.
+
+Για payments, ενσωμάτωσα Stripe. Εδώ το Cursor βοήθησε πολύ:
+
+prompt
+Add Stripe checkout for the Pro plan (€9/month). Create a webhook to update user subscription status in Supabase. Handle subscription cancellation.
+
+
+**Λάθος #3**: Ξέχασα να κάνω test τα webhooks locally. Χρειάζεσαι Stripe CLI για αυτό — μην το αγνοείς.
+
+## Ώρα 5-6: Deploy και fixes
+
+Deploy στο Vercel ήταν instant. Αλλά μετά ήρθαν τα bugs:
+
+- CORS errors με το API
+- Environment variables που δεν είχα βάλει στο Vercel
+- Ένα typo στο Stripe price ID
+
+Όλα fixάρονταν σε λεπτά με Cursor. Απλά paste το error message και έλεγε τι να αλλάξω.
+
+## Το πραγματικό κόστος (μετά από 1 μήνα)
+
+- **Vercel**: €0 (free tier αρκεί για ~100K requests/μήνα)
+- **Supabase**: €0 (free tier)
+- **OpenAI API**: ~€15/μήνα (με ~500 conversions/μήνα)
+- **Domain**: €12/χρόνο
+
+**Σύνολο**: ~€16/μήνα operational cost.
+
+## Τι έμαθα
+
+1. **Ξεκίνα από το UI** — είναι πιο εύκολο να γράψεις κώδικα όταν ξέρεις πώς θα φαίνεται.
+
+2. **AI δεν αντικαθιστά το debugging** — θα κάνεις λάθη, θα υπάρχουν bugs. Το AI απλά τα φτιάχνει πιο γρήγορα.
+
+3. **Free tiers είναι αρκετά για MVP** — μην πληρώσεις τίποτα μέχρι να έχεις τους πρώτους χρήστες.
+
+4. **Prompts > code skills** — Δεν είμαι developer. Αλλά ξέρω να περιγράφω τι θέλω με σαφήνεια.
+
+## Actionable takeaway
+
+Αν έχεις μια ιδέα που μπορεί να γίνει website, δοκίμασε αυτό:
+
+1. Φτιάξε το UI στο v0 (30 λεπτά)
+2. Κάνε export και άνοιξε σε Cursor
+3. Πες του τι functionality θέλεις
+4. Deploy στο Vercel
+
+Δεν χρειάζεσαι bootcamp. Χρειάζεσαι ένα βράδυ και καλά prompts.

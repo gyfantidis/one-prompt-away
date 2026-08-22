@@ -1,0 +1,133 @@
+---
+title: "I Built This Website with AI in One Night — Full Breakdown, Costs, and Mistakes"
+description: "How I used AI tools to build a complete website in one evening. Real costs, actual prompts, and the mistakes that cost me hours."
+date: "2026-07-06"
+category: "prompt-lab"
+tags: ["website-building","cursor","claude","prompt-engineering","case-study"]
+hero: "/images/articles/ai-website-one-night-breakdown-hero.webp"
+readingTime: "4 min"
+---
+
+Last Tuesday, I challenged myself to build a complete website using AI — from zero to deployed — in one evening. Here's exactly what happened, what it cost, and the mistakes I wish I'd avoided.
+
+## The Goal
+
+I wanted to create a simple portfolio site with a blog section. Nothing fancy: homepage, about page, project gallery, and a contact form. The kind of site that usually takes me a weekend.
+
+## The Stack I Chose
+
+I went with Next.js, Tailwind CSS, and deployed on Vercel. Why? Because AI tools like Cursor and Claude know these technologies inside out. More training data means better code suggestions.
+
+## Hour 1: The Foundation
+
+I started in Cursor with Claude as my AI assistant. My first prompt set the direction:
+
+prompt
+Create a Next.js 14 app with Tailwind CSS. I need:
+- Homepage with hero section
+- About page
+- Projects grid (6 items)
+- Contact form
+
+Use App Router. Keep the design minimal and modern. Dark mode support.
+
+
+Within 15 minutes, I had a working skeleton. The AI generated the file structure, basic components, and even set up the Tailwind config.
+
+## Hour 2: The Design Phase
+
+Here's where I made my first big mistake. I kept asking for "better design" without being specific. The AI just shuffled things around.
+
+What finally worked:
+
+prompt
+Redesign the hero section with these constraints:
+- Max width 1200px, centered
+- Headline: 48px bold, subtitle: 18px regular
+- CTA button with hover animation (scale 1.05)
+- Background gradient from slate-900 to slate-800
+- Add subtle grid pattern overlay at 5% opacity
+
+
+Specific numbers beat vague adjectives every time.
+
+## Hour 3: Content and Components
+
+I needed project cards, testimonials, and a working contact form. Instead of prompting one by one, I batched them:
+
+prompt
+Create three React components:
+
+1. ProjectCard - takes title, description, image, tags array, link. Hover effect lifts card with shadow.
+
+2. TestimonialSlider - array of testimonials with name, role, quote, avatar. Auto-rotate every 5 seconds.
+
+3. ContactForm - name, email, message fields. Client-side validation. On submit, POST to /api/contact.
+
+All components should match existing Tailwind theme. TypeScript interfaces required.
+
+
+This saved me at least 30 minutes compared to separate prompts.
+
+## Hour 4: The Debugging Disaster
+
+The contact form broke everything. The API route wasn't connecting, and I spent 40 minutes asking the AI to "fix the form" with no luck.
+
+My mistake? I wasn't sharing error messages. Once I pasted the actual console error:
+
+prompt
+This API route returns 405 Method Not Allowed:
+
+[pasted full error stack]
+
+Here's my current route.ts file:
+
+[pasted code]
+
+What's wrong?
+
+
+Fixed in 2 minutes. The AI spotted a missing export immediately.
+
+## Hour 5: Polish and Deploy
+
+Final stretch. I asked for:
+
+prompt
+Review this codebase for:
+1. Accessibility issues (ARIA labels, alt text)
+2. SEO basics (meta tags, Open Graph)
+3. Performance (image optimization, lazy loading)
+
+List issues with file paths and line numbers.
+
+
+The AI found 12 issues. Most were missing alt attributes and one lazy-loading opportunity I'd overlooked.
+
+Deployment to Vercel took 5 minutes. Push to GitHub, connect repo, done.
+
+## The Final Cost
+
+- Cursor Pro subscription: $20/month (already had it)
+- Vercel: Free tier
+- Domain: $12/year (already owned)
+- Total time: 5 hours 15 minutes
+- Claude API calls: Included in Cursor
+
+Actual out-of-pocket for this project: $0
+
+## What I'd Do Differently
+
+**Mistake 1:** Vague design prompts wasted 45 minutes. Always include specific measurements, colors, and behaviors.
+
+**Mistake 2:** Not sharing error messages. The AI can't debug what it can't see.
+
+**Mistake 3:** Building components one at a time. Batching related requests is faster and produces more consistent code.
+
+**Mistake 4:** Skipping the review step until the end. Should have done mini-reviews after each major section.
+
+## The Takeaway
+
+AI won't magically build your site while you watch Netflix. But it compresses a weekend project into an evening — if you prompt with precision. The more specific your instructions, the less time you spend fixing AI guesswork.
+
+Start your next project with constraints, not wishes. Your future self will thank you.

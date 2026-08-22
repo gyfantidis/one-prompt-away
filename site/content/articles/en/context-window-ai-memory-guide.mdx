@@ -1,0 +1,106 @@
+---
+title: "Context Window: Why AI Forgets Mid-Conversation and How to Make It Remember"
+description: "Learn why ChatGPT and other AI tools forget what you said and discover practical techniques to extend AI memory in long conversations."
+date: "2026-06-29"
+category: "behind-the-prompt"
+tags: ["context-window","ai-memory","prompt-engineering","chatgpt-tips"]
+hero: "/images/articles/context-window-ai-memory-guide-hero.webp"
+readingTime: "4 min"
+---
+
+## The Frustrating Moment AI Goes Blank
+
+You're 20 messages deep into a conversation with ChatGPT. You've explained your project, your constraints, your preferences. Then you ask a follow-up question and the AI responds like you're complete strangers.
+
+"What project are you referring to?"
+
+I've been there. Multiple times. And it's not a bug — it's a fundamental limitation called the context window.
+
+## What Is a Context Window?
+
+Think of the context window as AI's working memory. It's the total amount of text the model can "see" at once — your messages, its responses, and any system instructions all combined.
+
+Here's how it breaks down for popular models:
+
+- **GPT-4o**: ~128,000 tokens (roughly 96,000 words)
+- **Claude 3.5 Sonnet**: ~200,000 tokens
+- **Gemini 1.5 Pro**: up to 1 million tokens
+
+Sounds huge, right? But here's what nobody tells you: just because a model CAN hold 128k tokens doesn't mean it processes all of them equally well.
+
+## The "Lost in the Middle" Problem
+
+Researchers found something interesting. When you give AI a long document, it remembers the beginning well. It remembers the end well. But the middle? That's where things get fuzzy.
+
+I tested this myself. I gave Claude a 50-page document and asked questions about details from different sections. Information from pages 1-5 and 45-50? Accurate. Pages 20-30? Hit or miss.
+
+This isn't the AI being lazy. It's how the attention mechanism works under the hood.
+
+## 5 Practical Ways to Make AI Remember Better
+
+### 1. Front-Load Critical Information
+
+Put your most important constraints and context at the very beginning of your conversation. Don't bury the key details in message #7.
+
+prompt
+Before we start, here are the non-negotiables for this project:
+- Budget: €5,000 maximum
+- Timeline: 3 weeks
+- Audience: B2B SaaS founders
+- Tone: Professional but not corporate
+
+Now, let's discuss the marketing strategy...
+
+
+### 2. Use Explicit Callbacks
+
+When you reference something from earlier, don't assume the AI remembers. Repeat the key detail.
+
+Bad: "Now apply that to the second scenario."
+
+Good: "Now apply the same 3-step framework (awareness, consideration, decision) to the second scenario about email sequences."
+
+### 3. Create a Running Summary
+
+For long projects, ask the AI to maintain a summary that you can paste at the start of new sessions.
+
+prompt
+Before we continue tomorrow, give me a condensed summary of:
+1. The main decisions we've made
+2. Open questions still to resolve
+3. The current direction we're heading
+
+Keep it under 300 words so I can paste it into our next chat.
+
+
+### 4. Chunk Your Conversations
+
+Instead of one massive 50-message thread, break complex projects into focused sessions. One for research. One for outlining. One for execution.
+
+Each session starts fresh with a targeted context, not a bloated history of tangents.
+
+### 5. Use the "Remind Me" Technique
+
+Periodically ask the AI to confirm what it knows. This forces it to surface the information and keeps it active in the context.
+
+prompt
+Quick check: What are the three main constraints I mentioned for this project? List them before we continue.
+
+
+If it gets something wrong, correct it immediately. Now that correction is recent and weighted more heavily.
+
+## When Context Window Isn't Your Problem
+
+Sometimes the AI seems forgetful but the real issue is ambiguity. You thought you were clear. The AI interpreted it differently.
+
+Before blaming memory limits, ask yourself: "If I showed this conversation to a colleague with zero context, would they understand exactly what I want?"
+
+Usually, the answer is no.
+
+## The Takeaway
+
+Context windows are getting bigger every few months. But size isn't everything. How you structure information matters more than how much you can fit.
+
+My rule: treat every message like it might be the only one the AI truly "remembers." Front-load context, be explicit with references, and create summaries for long projects.
+
+The AI isn't forgetting because it doesn't care. It's forgetting because attention has limits — just like ours.

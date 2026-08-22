@@ -27,74 +27,74 @@
     {
       "topic": "Perplexity AI: Διέγραψα το Google από το browser μου — λάθος ή σωστά;",
       "category": "tool-drop",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-04-20"
     },
     {
       "topic": "System prompts: Το μυστικό που χρησιμοποιούν οι pros και δεν σου λένε",
       "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-04-27"
     },
     {
       "topic": "Πέρασα εξετάσεις με 3 prompts — χωρίς να ξαναδιαβάσω το ίδιο 5 φορές",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-05-04"
     },
     {
       "topic": "Canva AI: Έφτιαξα brand identity σε 20 λεπτά — χωρίς να ξέρω design",
       "category": "tool-drop",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-05-11"
     },
     {
       "topic": "Few-shot prompting: Η τεχνική που κάνει το ChatGPT να σε καταλαβαίνει επιτέλους",
       "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-05-18"
     },
     {
       "topic": "Γράφω blog post σε 10 λεπτά με αυτό το prompt — και δεν φαίνεται AI-generated",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-05-25"
     },
     {
       "topic": "NotebookLM: Έβαλα 200 σελίδες PDF μέσα — απάντησε σε 3 δευτερόλεπτα",
       "category": "tool-drop",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-01"
     },
     {
       "topic": "Prompt chaining: Πώς λύνω πολύπλοκα προβλήματα με μικρά αλυσιδωτά prompts",
       "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-08"
     },
     {
       "topic": "Έφτιαξα business plan από το μηδέν σε 4 ώρες — ο επενδυτής δεν πίστευε ότι ήταν AI",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-15"
     },
     {
       "topic": "v0 by Vercel: Έγραψα ένα prompt και πήρα ολόκληρο UI — χωρίς κώδικα",
       "category": "tool-drop",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-22"
     },
     {
       "topic": "Context window: Γιατί το AI «ξεχνάει» στη μέση και πώς να το κάνεις να θυμάται",
       "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-06-29"
     },
     {
       "topic": "Έφτιαξα αυτό το site με AI σε ένα βράδυ — full breakdown, κόστος και λάθη",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-07-06"
     }
   ]
 }
