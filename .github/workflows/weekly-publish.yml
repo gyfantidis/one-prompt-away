@@ -44,6 +44,16 @@ jobs:
         working-directory: scripts
         run: npm ci || npm install
 
+      # Αν η ουρά κοντεύει να αδειάσει, ζήτα νέα topics από το Claude.
+      # Το --min-pending 3 σημαίνει: μην κάνεις τίποτα όσο υπάρχουν >=3 topics.
+      # continue-on-error: αν αποτύχει το refill αλλά υπάρχουν ακόμα topics,
+      # θέλουμε να δημοσιευτεί κανονικά το άρθρο της εβδομάδας.
+      - name: Top up queue if running low
+        if: ${{ !inputs.topic }}
+        continue-on-error: true
+        working-directory: scripts
+        run: npx tsx suggest-topics.ts 10 --auto --min-pending 3
+
       - name: Generate bilingual article (EL + EN)
         working-directory: scripts
         run: |

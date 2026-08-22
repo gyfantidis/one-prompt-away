@@ -95,6 +95,126 @@
       "category": "prompt-lab",
       "status": "done",
       "published": "2026-07-06"
+    },
+    {
+      "topic": "Gemini αντί για ChatGPT για 2 μήνες — τι κέρδισα και τι μου έλειψε",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Ελληνικά ή αγγλικά prompts; Έκανα το τεστ — η διαφορά με εξέπληξε",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Cold email που παίρνει απάντηση — το prompt που μου έφερε 3 πελάτες",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "ElevenLabs: Έφτιαξα τη φωνή μου στα ελληνικά — άκου το αποτέλεσμα",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Role prompting: Γιατί το «είσαι έμπειρος X» αλλάζει τα πάντα",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Από λευκή σελίδα σε δομημένη εργασία σε 20 λεπτά",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Whisper: 3 ώρες ηχογράφηση σε κείμενο, στα ελληνικά, δωρεάν",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Negative prompting: Το να λες τι ΝΑ ΜΗΝ κάνει είναι πιο δυνατό απ' ό,τι νομίζεις",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Έκανα mock interview με AI πριν τη συνέντευξη — πέρασα",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Gamma: Παρουσίαση 20 slides σε 5 λεπτά — και δεν ντράπηκα να τη δείξω",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Το AI σου λέει ψέματα με σιγουριά — 4 τρόποι να το πιάσεις",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Meeting notes → action items αυτόματα: το prompt μου",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Midjourney vs Flux: 50 εικόνες για Instagram — ποιο κερδίζει",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Σταμάτα να καθαρίζεις κείμενο — ζήτα πίνακα ή JSON από την αρχή",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Δεν ξέρω Excel — και φτιάχνω formulas με ένα prompt",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Ollama: Τρέχω AI στο laptop μου χωρίς internet και χωρίς συνδρομή",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Meta-prompting: Βάζω το AI να γράφει τα prompts μου",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "100 περιγραφές προϊόντων για e-shop σε ένα απόγευμα",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Make + AI: Έστησα automation χωρίς μία γραμμή κώδικα",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Γιατί το πρώτο draft δεν είναι ποτέ το τελικό — το loop που χρησιμοποιώ",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
     }
   ]
 }
