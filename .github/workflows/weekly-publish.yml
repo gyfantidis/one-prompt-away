@@ -22,6 +22,8 @@ on:
 
 env:
   ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+  RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
 
 permissions:
   contents: write
@@ -85,6 +87,13 @@ jobs:
             echo "⚠️ No new content generated"
             exit 0
           fi
+
+      # Στέλνει το άρθρο στους συνδρομητές. Το ίδιο το script στέλνει
+      # ΜΟΝΟ αν το νεότερο άρθρο είναι σημερινό, οπότε ένα δεύτερο
+      # τρέξιμο δεν ξαναστέλνει παλιό άρθρο σε όλους.
+      - name: Send newsletter
+        working-directory: scripts
+        run: npx tsx send-newsletter.ts
 
       - name: Summary
         run: |

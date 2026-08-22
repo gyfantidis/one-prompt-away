@@ -75,7 +75,7 @@ export default function LocaleLayout({
     >
       <body className="antialiased min-h-screen flex flex-col">
         <div className="flex-1">{children}</div>
-        <Footer />
+        <Footer locale={locale} />
       </body>
     </html>
   );

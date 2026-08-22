@@ -6,6 +6,7 @@ const el = {
   nav: {
     articles: "Άρθρα",
     about: "Σχετικά",
+    privacy: "Απόρρητο",
     backHome: "Αρχική",
     backArticles: "Όλα τα άρθρα",
   },
@@ -49,6 +50,43 @@ const el = {
     copied: "αντιγράφηκε!",
     ctaText:
       "Κάθε εβδομάδα δημοσιεύω νέο content για AI tools και prompts. Follow στο TikTok ή εγγράψου στο newsletter.",
+  },
+  privacy: {
+    metaTitle: "Απόρρητο",
+    metaDesc:
+      "Τι δεδομένα συλλέγει το One Prompt Away, γιατί, και πώς μπορείς να τα διαγράψεις.",
+    kicker: "> privacy",
+    title: "Απόρρητο",
+    intro:
+      "Σύντομα και χωρίς νομικίστικα: τι κρατάω, γιατί, και πώς το σβήνεις.",
+    updated: "Τελευταία ενημέρωση: Αύγουστος 2026",
+    sections: [
+      {
+        h: "Newsletter",
+        p: "Αν εγγραφείς, αποθηκεύεται μόνο το email σου — τίποτα άλλο. Το χρησιμοποιώ αποκλειστικά για να σου στέλνω ένα email την εβδομάδα με το νέο άρθρο. Δεν το πουλάω, δεν το δίνω σε τρίτους, δεν το χρησιμοποιώ για διαφημίσεις.",
+      },
+      {
+        h: "Πού αποθηκεύεται",
+        p: "Στο Resend, την υπηρεσία που στέλνει τα email. Τα δεδομένα φυλάσσονται στους servers τους ως πάροχος επεξεργασίας για λογαριασμό μου.",
+      },
+      {
+        h: "Απεγγραφή",
+        p: "Κάθε email έχει σύνδεσμο απεγγραφής στο κάτω μέρος. Ένα κλικ και σταματούν — δεν χρειάζεται να μου στείλεις τίποτα. Αν θες να διαγραφεί εντελώς το email σου, γράψε μου.",
+      },
+      {
+        h: "Στατιστικά επισκεψιμότητας",
+        p: "Χρησιμοποιώ Plausible: μετράει επισκέψεις χωρίς cookies και χωρίς να ταυτοποιεί πρόσωπα. Δεν ξέρω ποιος είσαι — μόνο πόσοι διάβασαν τι.",
+      },
+      {
+        h: "Cookies",
+        p: "Το site δεν βάζει cookies παρακολούθησης. Γι' αυτό δεν βλέπεις banner συγκατάθεσης.",
+      },
+      {
+        h: "Τα δικαιώματά σου",
+        p: "Μπορείς να ζητήσεις να δεις ή να διαγράψεις ό,τι έχω για σένα. Στείλε email και θα το κάνω.",
+      },
+    ],
+    contactLabel: "Επικοινωνία:",
   },
   about: {
     metaTitle: "Σχετικά",
@@ -106,6 +144,7 @@ const en = {
   nav: {
     articles: "Articles",
     about: "About",
+    privacy: "Privacy",
     backHome: "Home",
     backArticles: "All articles",
   },
@@ -149,6 +188,42 @@ const en = {
     copied: "copied!",
     ctaText:
       "Every week I publish new content about AI tools and prompts. Follow on TikTok or subscribe to the newsletter.",
+  },
+  privacy: {
+    metaTitle: "Privacy",
+    metaDesc:
+      "What data One Prompt Away collects, why, and how you can delete it.",
+    kicker: "> privacy",
+    title: "Privacy",
+    intro: "Short and jargon-free: what I keep, why, and how you delete it.",
+    updated: "Last updated: August 2026",
+    sections: [
+      {
+        h: "Newsletter",
+        p: "If you subscribe, only your email is stored — nothing else. I use it solely to send you one email a week with the new article. I don't sell it, share it, or use it for ads.",
+      },
+      {
+        h: "Where it's stored",
+        p: "With Resend, the service that sends the emails. Your data sits on their servers as a processor acting on my behalf.",
+      },
+      {
+        h: "Unsubscribing",
+        p: "Every email has an unsubscribe link at the bottom. One click and they stop — no need to contact me. If you want your email deleted entirely, just ask.",
+      },
+      {
+        h: "Analytics",
+        p: "I use Plausible: it counts visits without cookies and without identifying anyone. I don't know who you are — only how many people read what.",
+      },
+      {
+        h: "Cookies",
+        p: "This site sets no tracking cookies. That's why there's no consent banner.",
+      },
+      {
+        h: "Your rights",
+        p: "You can ask to see or delete anything I hold about you. Email me and I'll do it.",
+      },
+    ],
+    contactLabel: "Contact:",
   },
   about: {
     metaTitle: "About",

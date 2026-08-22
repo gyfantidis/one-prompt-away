@@ -1,4 +1,10 @@
-export default function Footer() {
+import Link from "next/link";
+import { getTranslations } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
+
+export default function Footer({ locale }: { locale: Locale }) {
+  const t = getTranslations(locale);
+
   return (
     <footer className="border-t border-brand-border px-6 py-10">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -24,6 +30,12 @@ export default function Footer() {
           >
             Instagram
           </a>
+          <Link
+            href={`/${locale}/privacy`}
+            className="hover:text-brand-text transition-colors"
+          >
+            {t.nav.privacy}
+          </Link>
           <a
             href="mailto:info@oneprompt.gr"
             className="hover:text-brand-teal transition-colors"
