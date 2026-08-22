@@ -101,6 +101,8 @@ export default async function ArticlePage({
             <ArticleCover
               slug={params.slug}
               category={data.category as string}
+              title={data.title as string}
+              tags={data.tags as string[] | undefined}
               className="mb-8 aspect-[5/2] rounded-xl border border-brand-border"
             />
             <span

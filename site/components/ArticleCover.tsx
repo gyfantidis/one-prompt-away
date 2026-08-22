@@ -13,6 +13,8 @@
  * άρθρο παίρνει διαφορετική γωνία και θέση φωτισμού.
  */
 
+import { getTopicIcon } from "@/lib/topicIcon";
+
 const CATEGORY_COLOR: Record<string, string> = {
   "prompt-lab": "#2DD4BF",
   "tool-drop": "#60A5FA",
@@ -44,6 +46,9 @@ function hashString(input: string): number {
 export interface ArticleCoverProps {
   slug: string;
   category: string;
+  /** Τίτλος και tags τροφοδοτούν την επιλογή εικονιδίου θέματος. */
+  title: string;
+  tags?: string[];
   /** Κλάσεις για το container — εκεί ορίζεται και το ύψος/aspect ratio. */
   className?: string;
 }
@@ -51,9 +56,12 @@ export interface ArticleCoverProps {
 export default function ArticleCover({
   slug,
   category,
+  title,
+  tags,
   className = "",
 }: ArticleCoverProps) {
   const color = CATEGORY_COLOR[category] ?? FALLBACK_COLOR;
+  const TopicIcon = getTopicIcon(title, tags, category);
   const seed = hashString(slug);
 
   const angle = ANGLES[seed % ANGLES.length];
@@ -92,6 +100,14 @@ export default function ArticleCover({
         style={{
           backgroundImage: `radial-gradient(60% 95% at ${glowX}% ${glowY}%, ${color}2B 0%, transparent 70%)`,
         }}
+      />
+
+      {/* Σύμβολο θέματος — διαλέγεται από τίτλο + tags */}
+      <TopicIcon
+        aria-hidden="true"
+        strokeWidth={1.25}
+        className="absolute right-[7%] top-1/2 h-[46%] w-auto -translate-y-1/2"
+        style={{ color, opacity: 0.85 }}
       />
 
       {/* Γραμμή έμφασης στη βάση */}

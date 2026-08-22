@@ -50,6 +50,8 @@ export default function ArticleCard({
       <ArticleCover
         slug={slug}
         category={category}
+        title={title}
+        tags={tags}
         className={`border-b border-brand-border ${
           featured ? "h-40 sm:h-52 lg:h-60" : "h-24 sm:h-28"
         }`}
