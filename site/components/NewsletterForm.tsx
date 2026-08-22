@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import type { Locale } from "@/lib/i18n";
 
 interface Props {
+  /** Καθορίζει σε ποια λίστα μπαίνει ο συνδρομητής και σε ποια γλώσσα
+      θα λαμβάνει τα email. */
+  locale: Locale;
   placeholder: string;
   buttonText: string;
   successText: string;
   errorText: string;
 }
 
-export default function NewsletterForm({ placeholder, buttonText, successText, errorText }: Props) {
+export default function NewsletterForm({ locale, placeholder, buttonText, successText, errorText }: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -23,7 +27,7 @@ export default function NewsletterForm({ placeholder, buttonText, successText, e
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, locale }),
       });
 
       if (res.ok) {

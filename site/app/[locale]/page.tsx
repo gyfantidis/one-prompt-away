@@ -203,6 +203,7 @@ export default function Home({ params }: { params: { locale: string } }) {
             </h2>
             <p className="text-brand-muted mb-6">{t.home.newsletterText}</p>
             <NewsletterForm
+              locale={locale}
               placeholder={t.home.newsletterPlaceholder}
               buttonText={t.home.newsletterButton}
               successText={t.home.newsletterSuccess}

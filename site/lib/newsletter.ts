@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from "crypto";
+import type { Locale } from "@/lib/i18n";
 
 /**
  * Το link απεγγραφής υπογράφεται, ώστε να μη μπορεί ο καθένας να
@@ -16,6 +17,16 @@ function signingSecret(): string {
   return secret;
 }
 
+/**
+ * Κάθε γλώσσα έχει δική της λίστα στο Resend, ώστε τη Δευτέρα να φεύγει
+ * το ελληνικό άρθρο στους Έλληνες και το αγγλικό στους Άγγλους.
+ */
+export function audienceIdFor(locale: Locale): string | undefined {
+  return locale === "en"
+    ? process.env.RESEND_AUDIENCE_ENGLISH_ID
+    : process.env.RESEND_AUDIENCE_ID;
+}
+
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
@@ -25,15 +36,19 @@ export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email) && email.length <= 254;
 }
 
-export function unsubscribeToken(email: string): string {
+export function unsubscribeToken(email: string, locale: Locale): string {
   return createHmac("sha256", signingSecret())
-    .update(normalizeEmail(email))
+    .update(`${normalizeEmail(email)}|${locale}`)
     .digest("hex")
     .slice(0, 32);
 }
 
-export function verifyUnsubscribeToken(email: string, token: string): boolean {
-  const expected = Buffer.from(unsubscribeToken(email));
+export function verifyUnsubscribeToken(
+  email: string,
+  locale: Locale,
+  token: string
+): boolean {
+  const expected = Buffer.from(unsubscribeToken(email, locale));
   const given = Buffer.from(token ?? "");
   // Σύγκριση σταθερού χρόνου — αλλιώς διαρρέει πληροφορία μέσω timing.
   return expected.length === given.length && timingSafeEqual(expected, given);
@@ -50,10 +65,11 @@ export function siteUrl(): string {
   return url.replace(/\/$/, "");
 }
 
-export function unsubscribeUrl(email: string): string {
+export function unsubscribeUrl(email: string, locale: Locale): string {
   const params = new URLSearchParams({
     email: normalizeEmail(email),
-    token: unsubscribeToken(email),
+    locale,
+    token: unsubscribeToken(email, locale),
   });
   return `${siteUrl()}/api/unsubscribe?${params.toString()}`;
 }
