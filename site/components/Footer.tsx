@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t border-brand-border px-6 py-10">
-      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="font-mono text-sm text-brand-muted">
           <span className="text-brand-muted">&gt; </span>
           One<span className="text-brand-teal">Prompt</span>Away

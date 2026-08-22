@@ -82,3 +82,36 @@ body {
 pre[class*="language-prompt"] {
   border-left: 3px solid var(--brand-teal);
 }
+
+/* ── Focus states ──────────────────────────────────────────────
+   Ορατό focus ring για πλοήγηση με πληκτρολόγιο. Το :focus-visible
+   δεν ενεργοποιείται στο click με ποντίκι, οπότε δεν ενοχλεί.      */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brand-teal);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Το outline του browser δεν χρειάζεται όταν έχουμε δικό μας */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Reduced motion ────────────────────────────────────────────
+   Σεβασμός στη ρύθμιση του συστήματος για μειωμένη κίνηση.        */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

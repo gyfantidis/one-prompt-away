@@ -28,14 +28,11 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
   return (
     <main className="min-h-screen">
-      <Nav
-        locale={locale}
-        backHref={`/${locale}`}
-        backLabel={t.nav.backHome}
-      />
+      <Nav locale={locale} />
 
       <section className="pt-28 pb-20 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          <div className="max-w-3xl">
 
           {/* Header */}
           <div className="mb-12">
@@ -130,6 +127,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
             </div>
           </div>
 
+          </div>
         </div>
       </section>
     </main>

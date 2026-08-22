@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
-import { Clock } from "lucide-react";
+
 import Nav from "@/components/Nav";
+import ArticleCard from "@/components/ArticleCard";
 import { pillars } from "@/lib/pillars";
 import { getTranslations, isValidLocale, defaultLocale } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
@@ -61,14 +62,10 @@ export default function ArticlesPage({
 
   return (
     <main className="min-h-screen">
-      <Nav
-        locale={locale}
-        backHref={`/${locale}`}
-        backLabel={t.nav.backHome}
-      />
+      <Nav locale={locale} />
 
       <section className="pt-28 pb-20 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h1 className="font-mono font-bold text-3xl mb-4">
             {t.articles.title}
           </h1>
@@ -115,66 +112,51 @@ export default function ArticlesPage({
               </p>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
-              {articles.map((article) => {
-                const catLabel =
+            <div className="flex flex-col gap-5">
+              {/* Το πιο πρόσφατο άρθρο (της τρέχουσας κατηγορίας) ξεχωρίζει */}
+              <ArticleCard
+                featured
+                locale={locale}
+                slug={articles[0].slug}
+                title={articles[0].title}
+                description={articles[0].description}
+                category={articles[0].category}
+                categoryLabel={
                   t.categories[
-                    article.category as keyof typeof t.categories
-                  ] ?? article.category;
-                const catClass =
-                  article.category === "prompt-lab"
-                    ? "badge-prompt-lab"
-                    : article.category === "tool-drop"
-                    ? "badge-tool-drop"
-                    : "badge-behind-the-prompt";
-                return (
-                  <Link
-                    key={article.slug}
-                    href={`/${locale}/articles/${article.slug}`}
-                    className="group block bg-brand-surface border border-brand-border rounded-xl p-6 hover:border-brand-teal/50 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className={`inline-flex px-2.5 py-0.5 rounded text-xs font-mono font-semibold ${catClass}`}
-                      >
-                        {catLabel}
-                      </span>
-                      <span className="flex items-center gap-1 text-xs text-brand-muted font-mono">
-                        <Clock className="w-3 h-3" />
-                        {article.readingTime} {t.articles.readingTime}
-                      </span>
-                    </div>
-                    <h2 className="font-mono font-bold text-lg mb-2 group-hover:text-brand-teal transition-colors">
-                      {article.title}
-                    </h2>
-                    <p className="text-sm text-brand-muted leading-relaxed mb-3">
-                      {article.description}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <span className="text-xs text-brand-muted/60 font-mono">
-                        {new Date(article.date).toLocaleDateString(
-                          t.meta.dateLocale,
-                          {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          }
-                        )}
-                      </span>
-                      <div className="flex gap-2">
-                        {article.tags?.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs text-brand-muted/40 font-mono"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
+                    articles[0].category as keyof typeof t.categories
+                  ] ?? articles[0].category
+                }
+                readingTime={articles[0].readingTime}
+                readingTimeLabel={t.articles.readingTime}
+                date={articles[0].date}
+                dateLocale={t.meta.dateLocale}
+                tags={articles[0].tags}
+              />
+
+              {articles.length > 1 && (
+                <div className="grid gap-5 md:grid-cols-2">
+                  {articles.slice(1).map((article) => (
+                    <ArticleCard
+                      key={article.slug}
+                      locale={locale}
+                      slug={article.slug}
+                      title={article.title}
+                      description={article.description}
+                      category={article.category}
+                      categoryLabel={
+                        t.categories[
+                          article.category as keyof typeof t.categories
+                        ] ?? article.category
+                      }
+                      readingTime={article.readingTime}
+                      readingTimeLabel={t.articles.readingTime}
+                      date={article.date}
+                      dateLocale={t.meta.dateLocale}
+                      tags={article.tags}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

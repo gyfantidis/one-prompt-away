@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Nav from "@/components/Nav";
+import ArticleCard from "@/components/ArticleCard";
 import NewsletterForm from "@/components/NewsletterForm";
 import { pillars } from "@/lib/pillars";
 import { getTranslations, isValidLocale, defaultLocale } from "@/lib/i18n";
@@ -45,20 +46,32 @@ export default function Home({ params }: { params: { locale: string } }) {
   const t = getTranslations(locale);
   const recentArticles = getRecentArticles(locale);
 
+  const cardProps = (article: (typeof recentArticles)[number]) => ({
+    slug: article.slug,
+    title: article.title,
+    description: article.description,
+    category: article.category,
+    categoryLabel:
+      t.categories[article.category as keyof typeof t.categories] ??
+      article.category,
+    readingTime: article.readingTime,
+    readingTimeLabel: t.home.readingTime,
+  });
+
   return (
     <main className="min-h-screen">
       <Nav locale={locale} />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-mono font-bold text-4xl md:text-5xl leading-tight mb-6">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="font-mono font-bold text-4xl md:text-6xl leading-[1.1] mb-6">
             {t.home.heroPrefix}{" "}
             <span className="text-brand-teal">{t.home.heroHighlight}</span>{" "}
             {t.home.heroSuffix}
           </h1>
 
-          <p className="text-lg text-brand-muted max-w-xl mb-10 leading-relaxed">
+          <p className="text-lg text-brand-muted mb-10 leading-relaxed">
             {t.home.heroSubtext}
           </p>
 
@@ -74,7 +87,7 @@ export default function Home({ params }: { params: { locale: string } }) {
 
       {/* Terminal preview */}
       <section className="px-6 pb-20">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="bg-brand-surface border border-brand-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-3 border-b border-brand-border">
               <span className="w-3 h-3 rounded-full bg-red-500/60" />
@@ -115,7 +128,7 @@ export default function Home({ params }: { params: { locale: string } }) {
 
       {/* Content Pillars */}
       <section id="pillars" className="px-6 pb-20">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="font-mono font-bold text-2xl mb-8">
             {t.home.pillarsTitle}
           </h2>
@@ -148,7 +161,7 @@ export default function Home({ params }: { params: { locale: string } }) {
       {/* Recent Articles */}
       {recentArticles.length > 0 && (
         <section className="px-6 pb-20">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <h2 className="font-mono font-bold text-2xl">
                 {t.home.recentTitle}
@@ -160,43 +173,22 @@ export default function Home({ params }: { params: { locale: string } }) {
                 {t.home.seeAll}
               </Link>
             </div>
-            <div className="flex flex-col gap-4">
-              {recentArticles.map((article) => {
-                const catLabel =
-                  t.categories[article.category as keyof typeof t.categories] ??
-                  article.category;
-                const catClass =
-                  article.category === "prompt-lab"
-                    ? "badge-prompt-lab"
-                    : article.category === "tool-drop"
-                    ? "badge-tool-drop"
-                    : "badge-behind-the-prompt";
-                return (
-                  <Link
-                    key={article.slug}
-                    href={`/${locale}/articles/${article.slug}`}
-                    className="group block bg-brand-surface border border-brand-border rounded-xl p-6 hover:border-brand-teal/50 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className={`inline-flex px-2.5 py-0.5 rounded text-xs font-mono font-semibold ${catClass}`}
-                      >
-                        {catLabel}
-                      </span>
-                      <span className="flex items-center gap-1 text-xs text-brand-muted font-mono">
-                        <Clock className="w-3 h-3" />
-                        {article.readingTime} {t.home.readingTime}
-                      </span>
-                    </div>
-                    <h3 className="font-mono font-bold text-lg mb-2 group-hover:text-brand-teal transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-brand-muted leading-relaxed">
-                      {article.description}
-                    </p>
-                  </Link>
-                );
-              })}
+
+            <div className="flex flex-col gap-5">
+              {/* Το πιο πρόσφατο άρθρο παίρνει όλο το πλάτος */}
+              <ArticleCard featured locale={locale} {...cardProps(recentArticles[0])} />
+
+              {recentArticles.length > 1 && (
+                <div className="grid gap-5 md:grid-cols-2">
+                  {recentArticles.slice(1).map((article) => (
+                    <ArticleCard
+                      key={article.slug}
+                      locale={locale}
+                      {...cardProps(article)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -204,7 +196,7 @@ export default function Home({ params }: { params: { locale: string } }) {
 
       {/* Newsletter CTA */}
       <section className="px-6 pb-20">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="bg-brand-surface border border-brand-border rounded-xl p-8">
             <h2 className="font-mono font-bold text-xl mb-2">
               {t.home.newsletterTitle}

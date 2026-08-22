@@ -45,6 +45,8 @@ const el = {
   },
   article: {
     ctaTitle: "Σου άρεσε αυτό;",
+    copy: "αντιγραφή",
+    copied: "αντιγράφηκε!",
     ctaText:
       "Κάθε εβδομάδα δημοσιεύω νέο content για AI tools και prompts. Follow στο TikTok ή εγγράψου στο newsletter.",
   },
@@ -143,6 +145,8 @@ const en = {
   },
   article: {
     ctaTitle: "Did you like this?",
+    copy: "copy",
+    copied: "copied!",
     ctaText:
       "Every week I publish new content about AI tools and prompts. Follow on TikTok or subscribe to the newsletter.",
   },

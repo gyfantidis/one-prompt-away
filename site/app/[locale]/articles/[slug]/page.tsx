@@ -5,6 +5,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Clock, Calendar, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
+import CodeBlock from "@/components/CodeBlock";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleCover from "@/components/ArticleCover";
 import { getTranslations, isValidLocale, defaultLocale, locales } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
@@ -47,6 +50,13 @@ export async function generateMetadata({
       publishedTime: data.date,
       tags: data.tags,
     },
+    // Χωρίς αυτό, το X/Twitter έπαιρνε τον τίτλο του site αντί του άρθρου.
+    // Την εικόνα τη συμπληρώνει μόνο του το opengraph-image.tsx.
+    twitter: {
+      card: "summary_large_image",
+      title: data.title,
+      description: data.description,
+    },
   };
 }
 
@@ -77,16 +87,22 @@ export default async function ArticlePage({
 
   return (
     <main className="min-h-screen">
-      <Nav
-        locale={locale}
-        backHref={`/${locale}/articles`}
-        backLabel={t.nav.backArticles}
-      />
+      <ReadingProgress />
+      <Nav locale={locale} />
 
       <article className="pt-28 pb-20 px-6">
-        <div className="max-w-3xl mx-auto">
+        {/* Container ίδιου πλάτους με το nav· το κείμενο περιορίζεται
+            ΜΕΣΑ του και μένει αριστερά, ώστε το αριστερό άκρο να
+            συμπίπτει με το λογότυπο σε κάθε σελίδα. */}
+        <div className="max-w-5xl mx-auto">
+          <div className="max-w-3xl">
           {/* Header */}
           <div className="mb-10">
+            <ArticleCover
+              slug={params.slug}
+              category={data.category as string}
+              className="mb-8 aspect-[5/2] rounded-xl border border-brand-border"
+            />
             <span
               className={`inline-flex px-2.5 py-0.5 rounded text-xs font-mono font-semibold mb-4 ${catClass}`}
             >
@@ -123,7 +139,18 @@ export default async function ArticlePage({
 
           {/* MDX Content */}
           <div className="prose prose-invert prose-lg max-w-none">
-            <MDXRemote source={content} />
+            <MDXRemote
+              source={content}
+              components={{
+                pre: (props) => (
+                  <CodeBlock
+                    {...props}
+                    copyLabel={t.article.copy}
+                    copiedLabel={t.article.copied}
+                  />
+                ),
+              }}
+            />
           </div>
 
           {/* Footer CTA */}
@@ -150,6 +177,7 @@ export default async function ArticlePage({
                 Instagram
               </a>
             </div>
+          </div>
           </div>
         </div>
       </article>
