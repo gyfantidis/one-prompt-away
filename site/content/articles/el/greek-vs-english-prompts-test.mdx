@@ -1,0 +1,116 @@
+---
+title: "Ελληνικά ή Αγγλικά Prompts; Έκανα το Τεστ — Η Διαφορά Με Εξέπληξε"
+description: "Δοκίμασα το ίδιο prompt σε Ελληνικά και Αγγλικά σε ChatGPT, Claude και Gemini. Τα αποτελέσματα άλλαξαν τον τρόπο που γράφω prompts."
+date: "2026-08-31"
+category: "behind-the-prompt"
+tags: ["prompts","tips","ChatGPT","Claude","Gemini","behind-the-scenes"]
+readingTime: "3 λεπτά"
+---
+
+Κάθε φορά που γράφω prompt, έχω την ίδια σκέψη: Ελληνικά ή Αγγλικά;
+
+Το ερώτημα με βασάνιζε μήνες. Διάβασα δεκάδες απόψεις online — άλλοι έλεγαν "πάντα Αγγλικά", άλλοι "δεν έχει διαφορά". Κανείς δεν είχε actual data.
+
+Οπότε έκανα το τεστ μόνος μου.
+
+## Το Setup του Τεστ
+
+Πήρα 5 διαφορετικά prompts που χρησιμοποιώ καθημερινά:
+- Ένα για copywriting (Instagram caption)
+- Ένα για research (market analysis)
+- Ένα για coding (Python function)
+- Ένα για creative writing (short story)
+- Ένα για business (email template)
+
+Κάθε prompt το έτρεξα σε 3 models: ChatGPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro.
+
+Πρώτα στα Αγγλικά, μετά μετέφρασα ακριβώς στα Ελληνικά. Same context, same instructions — διαφορετική γλώσσα.
+
+## Τα Αποτελέσματα (Με Εκπλήξεις)
+
+### Copywriting: Τα Ελληνικά Κέρδισαν
+
+Αυτό δεν το περίμενα.
+
+prompt
+Γράψε ένα Instagram caption για καφετέρια στη Θεσσαλονίκη. Target: νέοι 20-30. Tone: casual, witty. Μέγιστο 150 λέξεις.
+
+
+Το output στα Ελληνικά ήταν πιο φυσικό. Είχε slang που actually χρησιμοποιούμε. Το Αγγλικό prompt έδωσε σωστό αλλά "μεταφρασμένο" ύφος — σαν να το έγραψε κάποιος που μιλάει Αγγλικά και μετά το πέρασε από Google Translate.
+
+Γιατί; Τα models έχουν τεράστιο Ελληνικό dataset από social media, blogs, forums. Όταν τους ζητάς κάτι σε Ελληνικά, "σκέφτονται" με Ελληνικό context.
+
+### Research & Analysis: Αγγλικά, Χωρίς Δεύτερη Σκέψη
+
+Εδώ η διαφορά ήταν τεράστια.
+
+prompt
+Analyze the Greek coffee market. Include: market size, key players, consumer trends 2024. Format: bullet points.
+
+
+Το ίδιο prompt στα Ελληνικά έδωσε πιο γενικές απαντήσεις. Στα Αγγλικά, τα models είχαν πρόσβαση σε περισσότερα papers, reports, data.
+
+Logic: Το 90%+ του training data είναι Αγγλικά. Για research tasks, γράφεις στη γλώσσα που έχει τα περισσότερα δεδομένα.
+
+### Coding: Πάντα Αγγλικά
+
+Εδώ δεν υπάρχει debate. Ελληνικά prompts για code δίνουν:
+- Comments στα Ελληνικά (που κανείς δεν θέλει)
+- Variable names με greeklish (nightmare)
+- Περισσότερα bugs
+
+Τα models εκπαιδεύτηκαν σε Αγγλικό code. Period.
+
+### Creative Writing: Εξαρτάται από το Output
+
+Αν θέλεις Ελληνικό output (π.χ. διήγημα στα Ελληνικά), γράψε prompt στα Ελληνικά. Αν θέλεις Αγγλικό output, γράψε στα Αγγλικά.
+
+Απλό, αλλά πολλοί το κάνουν ανάποδα.
+
+### Business Communication: Hybrid Approach
+
+Εδώ βρήκα το sweet spot:
+
+prompt
+Write a professional email σε Ελληνικά. Context: ακύρωση meeting, πρόταση για reschedule. Tone: apologetic αλλά confident. Recipient: CEO μεγάλης εταιρείας.
+
+
+Instructions στα Αγγλικά (πιο precise), context/output στα Ελληνικά.
+
+## Οι 3 Κανόνες που Βγήκαν
+
+**1. Match language to output**
+Αν θέλεις Ελληνικό output, Ελληνικά prompt. Αν θέλεις Αγγλικό, Αγγλικά.
+
+**2. Technical = English**
+Coding, data analysis, research papers → πάντα Αγγλικά.
+
+**3. Local context = Greek**
+Ελληνικό marketing, copywriting για Ελληνικό κοινό, local business → Ελληνικά.
+
+## Το Bonus Trick
+
+Όταν δεν είσαι σίγουρος, χρησιμοποίησε αυτό το format:
+
+prompt
+[INSTRUCTIONS IN ENGLISH]
+Write a blog post about...
+Tone: casual
+Length: 500 words
+
+[OUTPUT LANGUAGE]
+Ελληνικά
+
+[CONTEXT]
+Το blog είναι για νέους Έλληνες entrepreneurs...
+
+
+Παίρνεις την precision των Αγγλικών instructions με τη φυσικότητα του Ελληνικού output.
+
+## Actionable Takeaway
+
+Μην ακούς τις γενικές συμβουλές. Τέσταρε μόνος σου.
+
+Πάρε ένα prompt που χρησιμοποιείς συχνά. Τρέξε το και στις δύο γλώσσες. Σύγκρινε τα αποτελέσματα.
+
+Θα εκπλαγείς — όπως εξεπλάγην κι εγώ.
