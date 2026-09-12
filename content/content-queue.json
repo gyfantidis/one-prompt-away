@@ -115,6 +115,12 @@
       "published": "2026-09-07"
     },
     {
+      "topic": "Δοκίμασα το Claude της Anthropic για μια εβδομάδα — τι κάνει καλύτερα από το ChatGPT",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
       "topic": "Negative prompting: Το να λες τι ΝΑ ΜΗΝ κάνει είναι πιο δυνατό απ' ό,τι νομίζεις",
       "category": "behind-the-prompt",
       "status": "pending",
