@@ -92,6 +92,38 @@ jobs:
       # Στέλνει το άρθρο στους συνδρομητές. Το ίδιο το script στέλνει
       # ΜΟΝΟ αν το νεότερο άρθρο είναι σημερινό, οπότε ένα δεύτερο
       # τρέξιμο δεν ξαναστέλνει παλιό άρθρο σε όλους.
+      # Το Coolify θέλει μερικά λεπτά για build μετά το push. Περιμένουμε
+      # να ανοίγει η σελίδα του σημερινού άρθρου πριν φύγει το newsletter,
+      # αλλιώς οι συνδρομητές πατάνε link που βγάζει 404.
+      - name: Wait for new article to go live
+        run: |
+          TODAY=$(date -u +%F)
+          URLS=""
+          for LOCALE in el en; do
+            for FILE in $(grep -l "^date: \"$TODAY\"" site/content/articles/$LOCALE/*.mdx 2>/dev/null); do
+              URLS="$URLS https://oneprompt.gr/$LOCALE/articles/$(basename "$FILE" .mdx)"
+            done
+          done
+
+          if [ -z "$URLS" ]; then
+            echo "📭 Δεν υπάρχει σημερινό άρθρο — δεν χρειάζεται αναμονή."
+            exit 0
+          fi
+
+          DEADLINE=$(( $(date +%s) + 900 ))
+          for URL in $URLS; do
+            until [ "$(curl -s -o /dev/null -w '%{http_code}' "$URL")" = "200" ]; do
+              if [ "$(date +%s)" -ge "$DEADLINE" ]; then
+                echo "❌ Το $URL δεν άνοιξε μέσα σε 15 λεπτά — το newsletter ΔΕΝ στάλθηκε."
+                echo "   Έλεγξε το deploy στο Coolify και στείλε το με: cd scripts && npx tsx send-newsletter.ts"
+                exit 1
+              fi
+              echo "⏳ $URL δεν είναι ακόμα live — ξαναδοκιμάζω σε 30s"
+              sleep 30
+            done
+            echo "✅ $URL είναι live"
+          done
+
       - name: Send newsletter
         working-directory: scripts
         run: npx tsx send-newsletter.ts
