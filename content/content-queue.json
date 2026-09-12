@@ -115,30 +115,6 @@
       "published": "2026-09-07"
     },
     {
-      "topic": "ElevenLabs: Έφτιαξα τη φωνή μου στα ελληνικά — άκου το αποτέλεσμα",
-      "category": "tool-drop",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Role prompting: Γιατί το «είσαι έμπειρος X» αλλάζει τα πάντα",
-      "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Από λευκή σελίδα σε δομημένη εργασία σε 20 λεπτά",
-      "category": "prompt-lab",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Whisper: 3 ώρες ηχογράφηση σε κείμενο, στα ελληνικά, δωρεάν",
-      "category": "tool-drop",
-      "status": "pending",
-      "published": null
-    },
-    {
       "topic": "Negative prompting: Το να λες τι ΝΑ ΜΗΝ κάνει είναι πιο δυνατό απ' ό,τι νομίζεις",
       "category": "behind-the-prompt",
       "status": "pending",
@@ -151,7 +127,7 @@
       "published": null
     },
     {
-      "topic": "Gamma: Παρουσίαση 20 slides σε 5 λεπτά — και δεν ντράπηκα να τη δείξω",
+      "topic": "Μίλησα στο ChatGPT αντί να γράφω για μια εβδομάδα — το voice mode με έπεισε",
       "category": "tool-drop",
       "status": "pending",
       "published": null
@@ -163,49 +139,67 @@
       "published": null
     },
     {
-      "topic": "Meeting notes → action items αυτόματα: το prompt μου",
-      "category": "prompt-lab",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Midjourney vs Flux: 50 εικόνες για Instagram — ποιο κερδίζει",
-      "category": "tool-drop",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Σταμάτα να καθαρίζεις κείμενο — ζήτα πίνακα ή JSON από την αρχή",
-      "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
-    },
-    {
       "topic": "Δεν ξέρω Excel — και φτιάχνω formulas με ένα prompt",
       "category": "prompt-lab",
       "status": "pending",
       "published": null
     },
     {
-      "topic": "Ollama: Τρέχω AI στο laptop μου χωρίς internet και χωρίς συνδρομή",
+      "topic": "Gamma: Παρουσίαση 20 slides σε 5 λεπτά — και δεν ντράπηκα να τη δείξω",
       "category": "tool-drop",
       "status": "pending",
       "published": null
     },
     {
-      "topic": "Meta-prompting: Βάζω το AI να γράφει τα prompts μου",
+      "topic": "Role prompting: Γιατί το «είσαι έμπειρος X» αλλάζει τα πάντα",
       "category": "behind-the-prompt",
       "status": "pending",
       "published": null
     },
     {
-      "topic": "100 περιγραφές προϊόντων για e-shop σε ένα απόγευμα",
+      "topic": "Οργάνωσα ταξίδι 5 ημερών με ένα prompt — πρόγραμμα, budget και βαλίτσα",
       "category": "prompt-lab",
       "status": "pending",
       "published": null
     },
     {
-      "topic": "Make + AI: Έστησα automation χωρίς μία γραμμή κώδικα",
+      "topic": "ChatGPT Plus: Αξίζουν τα 20€ τον μήνα αν δεν είσαι προγραμματιστής;",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Τι να μην πεις ποτέ στο ChatGPT — τα δεδομένα που κρατάς για σένα",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Φωτογράφισα ένα χαρτί της εφορίας — το AI μου το εξήγησε απλά",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Το AI που έχεις ήδη στο κινητό σου και δεν το χρησιμοποιείς",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Δεν ξέρεις τι να γράψεις; Βάλε το AI να σου κάνει ερωτήσεις πρώτα",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Από λευκή σελίδα σε δομημένη εργασία σε 20 λεπτά",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Suno: Έφτιαξα τραγούδι γενεθλίων για φίλο με ένα prompt",
       "category": "tool-drop",
       "status": "pending",
       "published": null
@@ -213,6 +207,84 @@
     {
       "topic": "Γιατί το πρώτο draft δεν είναι ποτέ το τελικό — το loop που χρησιμοποιώ",
       "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Το μήνυμα που δεν ήξερα πώς να γράψω — δύσκολες συζητήσεις με βοήθεια AI",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Έφτιαξα προσκλητήριο για πάρτι με το ChatGPT σε 2 λεπτά — χωρίς Photoshop",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Γιατί η ίδια ερώτηση δίνει άλλη απάντηση κάθε φορά — και πώς να το εκμεταλλευτείς",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Έβαλα το AI να φτιάξει το budget του σπιτιού — βρήκα πού πάνε τα λεφτά μου",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Custom instructions: 2 λεπτά ρύθμιση στο ChatGPT, καλύτερες απαντήσεις για πάντα",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Πες στο AI ποιος θα το διαβάσει — η μία λεπτομέρεια που αλλάζει όλο τον τόνο",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Πρόγραμμα γυμναστικής 3 φορές τη βδομάδα με ένα prompt — χωρίς personal trainer",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Photoroom: Φωτογραφίες για Vinted και e-shop σαν από studio, μόνο με το κινητό",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Μικρό ή μεγάλο prompt; Πότε αξίζει να γράψεις περισσότερα",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Σύγκρινα 3 κινητά πριν αγοράσω με ένα prompt — γλίτωσα ώρες από reviews",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "CapCut AI: Βίντεο για Instagram χωρίς να ξέρω μοντάζ",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Σταμάτα να σε επαινεί — πώς παίρνεις ειλικρινές feedback από το AI",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Ο λόγος του κουμπάρου: Έγραψα κάτι προσωπικό με AI — και κανείς δεν το κατάλαβε",
+      "category": "prompt-lab",
       "status": "pending",
       "published": null
     }
