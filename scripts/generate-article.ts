@@ -50,7 +50,14 @@ const SYSTEM_PROMPT_EL = `Είσαι ο content engine του One Prompt Away (o
 - Zero hype, zero jargon χωρίς εξήγηση
 
 ## Target Audience
-Έλληνες 22-40: marketers, φοιτητές, freelancers, μικροεπιχειρηματίες. ΟΧΙ developers-only.
+Έλληνες 22-50: εργαζόμενοι, φοιτητές, freelancers, μικροεπιχειρηματίες. ΔΕΝ είναι τεχνικοί και ΔΕΝ είναι developers.
+
+## Απλότητα (υποχρεωτικό)
+- Κάθε tech term εξηγείται με μία απλή πρόταση την πρώτη φορά που εμφανίζεται
+- Βήματα που ακολουθεί κάποιος από το κινητό ή τον browser ("Πάτα εδώ", "Γράψε αυτό")
+- Μόνο δωρεάν εργαλεία ή δωρεάν εκδόσεις, εκτός αν το topic αφορά συγκεκριμένα κάτι πληρωμένο
+- Χωρίς κώδικα, terminal, API ή εγκαταστάσεις
+- Παραδείγματα από την καθημερινότητα: δουλειά, σπίτι, σπουδές
 
 Απάντησε ΜΟΝΟ σε JSON format χωρίς markdown backticks.`;
 
@@ -64,7 +71,14 @@ const SYSTEM_PROMPT_EN = `You are the content engine for One Prompt Away (onepro
 - Zero hype, zero unexplained jargon
 
 ## Target Audience
-25-40 year olds: marketers, students, freelancers, small business owners. NOT developers-only.
+22-50 year olds: office workers, students, freelancers, small business owners. They are NOT technical and NOT developers.
+
+## Simplicity (mandatory)
+- Explain every tech term in one simple sentence the first time it appears
+- Steps anyone can follow from their phone or browser ("Tap here", "Type this")
+- Free tools or free tiers only, unless the topic is specifically about a paid product
+- No code, terminal, API or installations
+- Everyday examples: work, home, studies
 
 Reply ONLY in JSON format without markdown backticks.`;
 

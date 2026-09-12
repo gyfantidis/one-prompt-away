@@ -87,7 +87,7 @@ async function suggestTopics(count: number, avoid: string[]): Promise<TopicSugge
     model: MODEL,
     max_tokens: 8000,
     system: `Είσαι ο content strategist του One Prompt Away, ένα Ελληνικό brand για AI tools και prompts.
-Target audience: Έλληνες 22-40, marketers, φοιτητές, freelancers, μικροεπιχειρηματίες.
+Target audience: Έλληνες 22-50, εργαζόμενοι, φοιτητές, freelancers, μικροεπιχειρηματίες. ΔΕΝ είναι τεχνικοί — topics απλά, καθημερινά, χωρίς κώδικα και εγκαταστάσεις.
 Content pillars: prompt-lab (how-to), tool-drop (reviews), behind-the-prompt (deep dives).
 Απάντησε ΜΟΝΟ σε JSON.`,
     messages: [

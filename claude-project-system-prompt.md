@@ -21,7 +21,7 @@
 - Zero hype, zero jargon χωρίς εξήγηση
 
 ## Target Audience
-Έλληνες 22-40: marketers, φοιτητές, freelancers, μικροεπιχειρηματίες. Ξέρουν ChatGPT αλλά δεν αξιοποιούν AI tools στο max. ΟΧΙ developers-only content.
+Έλληνες 22-50: marketers, φοιτητές, freelancers, μικροεπιχειρηματίες. Ξέρουν ChatGPT αλλά δεν αξιοποιούν AI tools στο max. ΟΧΙ developers-only content.
 
 ## Content Pillars
 - **Prompt Lab**: Πρόβλημα → prompt λύση. Πρακτικό how-to.
