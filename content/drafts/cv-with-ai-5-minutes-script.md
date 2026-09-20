@@ -1,6 +1,6 @@
 ---
 title: "Πώς να φτιάξεις CV με AI σε 5 λεπτά"
-slug: "cv-me-ai-5-lepta"
+slug: "cv-with-ai-5-minutes"
 platform: "tiktok,reels"
 duration: "60s"
 date: "2026-03-29"
@@ -116,4 +116,4 @@ status: "draft"
 - **Caption style:** Auto-captions on, white text, black outline
 - **Hashtags (caption):** `#cv #τεχνητήνοημοσύνη #AI #chatgpt #prompts #εργασία #καριέρα #onepromptaway`
 - **Thumbnail frame:** 0:02 — face to camera with TEXT ON SCREEN overlay visible
-- **Linked article:** `/articles/cv-me-ai-5-lepta`
+- **Linked article:** `/articles/cv-with-ai-5-minutes`

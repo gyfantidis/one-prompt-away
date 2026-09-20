@@ -194,8 +194,10 @@ export default function Home({ params }: { params: { locale: string } }) {
         </section>
       )}
 
-      {/* Newsletter CTA */}
-      <section className="px-6 pb-20">
+      {/* Newsletter CTA — το id δίνει anchor (#newsletter) για links
+          από social. Το scroll-mt κρατάει τον τίτλο κάτω από το
+          fixed nav, αλλιώς το sticky header τον σκεπάζει. */}
+      <section id="newsletter" className="px-6 pb-20 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <div className="bg-brand-surface border border-brand-border rounded-xl p-8">
             <h2 className="font-mono font-bold text-xl mb-2">

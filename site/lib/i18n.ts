@@ -9,6 +9,7 @@ const el = {
     privacy: "Απόρρητο",
     backHome: "Αρχική",
     backArticles: "Όλα τα άρθρα",
+    subscribe: "Εγγραφή",
   },
   home: {
     heroPrefix: "Ένα",
@@ -49,7 +50,8 @@ const el = {
     copy: "αντιγραφή",
     copied: "αντιγράφηκε!",
     ctaText:
-      "Κάθε εβδομάδα δημοσιεύω νέο content για AI tools και prompts. Follow στο TikTok ή εγγράψου στο newsletter.",
+      "Κάθε Δευτέρα στέλνω ένα email με ένα prompt ή ένα tool που δοκίμασα. Χωρίς spam, διαγραφή με ένα κλικ.",
+    ctaButton: "Εγγραφή στο newsletter",
   },
   privacy: {
     metaTitle: "Απόρρητο",
@@ -102,7 +104,9 @@ const el = {
     pillarsTitle: "Τι θα βρεις εδώ",
     contactTitle: "Βρες με εδώ",
     contactText:
-      "Δημοσιεύω νέο content κάθε εβδομάδα. Follow για να μην χάνεις τίποτα.",
+      "Δημοσιεύω νέο content κάθε εβδομάδα. Μπες στο newsletter για να μην χάνεις τίποτα.",
+    subscribeLink: "Εγγραφή",
+    socialsNote: "Θα με βρεις και εδώ:",
     articlesLink: "Άρθρα",
   },
   pillars: {
@@ -127,6 +131,22 @@ const el = {
     "tool-drop": "Tool Drop",
     "behind-the-prompt": "Behind the Prompt",
   },
+  subscribe: {
+    metaTitle: "Εγγραφή",
+    metaDesc:
+      "Ένα email την εβδομάδα με το καλύτερο AI prompt ή tool. Χωρίς spam, χωρίς hype.",
+    kicker: "> subscribe",
+    title: "Ένα email την εβδομάδα.",
+    intro:
+      "Κάθε Δευτέρα στέλνω ένα email με ένα prompt ή ένα tool που δοκίμασα ο ίδιος και δούλεψε. Τίποτα άλλο.",
+    bullets: [
+      "Ένα πρακτικό prompt που κάνεις copy-paste σήμερα.",
+      "Ένα AI tool που δοκίμασα, με την ειλικρινή μου γνώμη.",
+      "Χωρίς jargon. Ό,τι δεν εξηγείται, δεν μπαίνει.",
+    ],
+    reassurance: "Χωρίς spam. Διαγραφή με ένα κλικ, σε κάθε email.",
+    socialTitle: "Ή βρες με στα social:",
+  },
   meta: {
     title: "One Prompt Away — Ένα prompt σε χωρίζει",
     description:
@@ -147,6 +167,7 @@ const en = {
     privacy: "Privacy",
     backHome: "Home",
     backArticles: "All articles",
+    subscribe: "Subscribe",
   },
   home: {
     heroPrefix: "One",
@@ -187,7 +208,8 @@ const en = {
     copy: "copy",
     copied: "copied!",
     ctaText:
-      "Every week I publish new content about AI tools and prompts. Follow on TikTok or subscribe to the newsletter.",
+      "Every Monday I send one email with a prompt or a tool I tried. No spam, unsubscribe with one click.",
+    ctaButton: "Subscribe to the newsletter",
   },
   privacy: {
     metaTitle: "Privacy",
@@ -239,7 +261,9 @@ const en = {
     pillarsTitle: "What you'll find here",
     contactTitle: "Find me here",
     contactText:
-      "I publish new content every week. Follow so you don't miss anything.",
+      "I publish new content every week. Join the newsletter so you don't miss anything.",
+    subscribeLink: "Subscribe",
+    socialsNote: "You'll also find me here:",
     articlesLink: "Articles",
   },
   pillars: {
@@ -263,6 +287,22 @@ const en = {
     "prompt-lab": "Prompt Lab",
     "tool-drop": "Tool Drop",
     "behind-the-prompt": "Behind the Prompt",
+  },
+  subscribe: {
+    metaTitle: "Subscribe",
+    metaDesc:
+      "One email a week with the best AI prompt or tool. No spam, no hype.",
+    kicker: "> subscribe",
+    title: "One email a week.",
+    intro:
+      "Every Monday I send one email with a prompt or a tool I tried myself and that actually worked. Nothing else.",
+    bullets: [
+      "One practical prompt you can copy-paste today.",
+      "One AI tool I tested, with my honest take.",
+      "No jargon. If it can't be explained, it doesn't go in.",
+    ],
+    reassurance: "No spam. Unsubscribe with one click, in every email.",
+    socialTitle: "Or find me on social:",
   },
   meta: {
     title: "One Prompt Away — One prompt away",

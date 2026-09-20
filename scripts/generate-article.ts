@@ -92,6 +92,39 @@ function slugify(text: string): string {
     .slice(0, 60);
 }
 
+/**
+ * Τα URL πρέπει να είναι ΠΑΝΤΑ αγγλικά — ποτέ greeklish.
+ * Το slugify() παραπάνω μεταγράφει ελληνικά σε λατινικά, οπότε αν
+ * γλιστρήσει ελληνικός τίτλος βγαίνει κάτι σαν "cv-me-ai-5-lepta".
+ * Εδώ το πιάνουμε πριν γραφτεί αρχείο.
+ */
+const GREEKLISH_MARKERS = [
+  "-me-", "-gia-", "-pos-", "-ti-", "-kai-", "-se-", "-apo-", "-sto-",
+  "-stin-", "-ton-", "-tin-", "-mou-", "-sou-", "-einai-", "-exei-",
+  "lepta", "efkola", "grigora", "kalytero", "kalytera", "diko",
+];
+
+function assertEnglishSlug(slug: string, title: string): void {
+  if (/[^\u0000-\u007F]/.test(slug)) {
+    throw new Error(
+      `Το slug "${slug}" περιέχει μη λατινικούς χαρακτήρες. Τα URL πρέπει να είναι αγγλικά.`
+    );
+  }
+
+  const padded = `-${slug}-`;
+  const hit = GREEKLISH_MARKERS.find((m) =>
+    m.startsWith("-") ? padded.includes(m) : padded.includes(`-${m}-`) || slug.endsWith(m)
+  );
+
+  if (hit) {
+    throw new Error(
+      `Το slug "${slug}" μοιάζει greeklish (βρέθηκε "${hit.replace(/-/g, "")}").\n` +
+        `   Τίτλος: "${title}"\n` +
+        `   Τα URL πρέπει να είναι στα αγγλικά — π.χ. "cv-with-ai-5-minutes", όχι "cv-me-ai-5-lepta".`
+    );
+  }
+}
+
 function wordCount(text: string): number {
   return text.split(/\s+/).length;
 }
@@ -115,7 +148,7 @@ Date: ${today}
 
 {
   "title": "Ελληνικός τίτλος — catchy, practical",
-  "slug": "${existingSlug || "english-slug-for-url"}",
+  "slug": "${existingSlug || "english-slug-for-url"}",  // ΠΑΝΤΑ στα αγγλικά, ΠΟΤΕ greeklish (σωστό: cv-with-ai-5-minutes / λάθος: cv-me-ai-5-lepta)
   "description": "SEO description, 150-160 chars, Ελληνικά",
   "tags": ["tag1", "tag2", "tag3"],
   "article_body": "Ολόκληρο το article body σε MDX format. Χρησιμοποίησε ## για headings. Βάλε prompts σε \`\`\`prompt code blocks. 600-1000 λέξεις.",
@@ -135,7 +168,7 @@ Generate a complete article. Reply in JSON with this structure:
 
 {
   "title": "English title — catchy, practical",
-  "slug": "${existingSlug || "english-slug-for-url"}",
+  "slug": "${existingSlug || "english-slug-for-url"}",  // ΠΑΝΤΑ στα αγγλικά, ΠΟΤΕ greeklish (σωστό: cv-with-ai-5-minutes / λάθος: cv-me-ai-5-lepta)
   "description": "SEO description, 150-160 chars, English",
   "tags": ["tag1", "tag2", "tag3"],
   "article_body": "Full article body in MDX format. Use ## for headings. Put prompts in \`\`\`prompt code blocks. 600-1000 words."
@@ -182,6 +215,7 @@ async function generateContent(topic: string, category: Category): Promise<Conte
   // Generate Greek first to get the canonical slug
   const elData = await generateForLocale(topic, category, "el", today);
   const slug = elData.slug || slugify(elData.title);
+  assertEnglishSlug(slug, elData.title);
 
   // Generate English using the same slug
   const enData = await generateForLocale(topic, category, "en", today, slug);

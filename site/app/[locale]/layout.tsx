@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
 import { JetBrains_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
@@ -64,9 +65,13 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const locale: Locale = isValidLocale(params.locale)
-    ? params.locale
-    : defaultLocale;
+  // Το [locale] είναι dynamic segment: ταιριάζει με ΟΤΙΔΗΠΟΤΕ. Χωρίς
+  // αυτόν τον έλεγχο, διευθύνσεις όπως /kati.xml σέρβιραν την ελληνική
+  // αρχική με status 200 — το Google τις έβλεπε ως υπαρκτές σελίδες.
+  // Ο έλεγχος μπαίνει στο layout ώστε να καλύπτει ΟΛΕΣ τις σελίδες από κάτω.
+  if (!isValidLocale(params.locale)) notFound();
+
+  const locale: Locale = params.locale;
 
   return (
     <html

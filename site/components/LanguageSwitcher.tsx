@@ -24,9 +24,18 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   return (
     <div className="flex items-center gap-0.5 font-mono text-xs">
       {locales.map((l, i) => (
-        <span key={l} className="flex items-center">
+        // Σε πολύ στενή οθόνη δείχνουμε μόνο την ΑΛΛΗ γλώσσα: το ζευγάρι
+        // GR|EN έτρωγε 70px που χρειάζεται το κουμπί εγγραφής.
+        <span
+          key={l}
+          className={`items-center ${
+            locale === l ? "hidden xs:flex" : "flex"
+          }`}
+        >
           {i > 0 && (
-            <span className="text-brand-border mx-1 select-none">|</span>
+            <span className="text-brand-border mx-1 hidden select-none xs:inline">
+              |
+            </span>
           )}
           <button
             onClick={() => switchLocale(l)}

@@ -1,6 +1,6 @@
 # Social Captions — Πώς να φτιάξεις CV με AI σε 5 λεπτά
 
-**Slug**: cv-me-ai-5-lepta
+**Slug**: cv-with-ai-5-minutes
 **Date**: 2026-03-29
 
 ---

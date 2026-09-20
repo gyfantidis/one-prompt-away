@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Clock, Calendar, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -161,24 +162,15 @@ export default async function ArticlePage({
               {t.article.ctaTitle}
             </p>
             <p className="text-brand-muted mb-4">{t.article.ctaText}</p>
-            <div className="flex gap-3">
-              <a
-                href="https://www.tiktok.com/@oneprompt.gr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-brand-teal text-brand-dark font-semibold text-sm rounded-lg hover:bg-brand-teal-light transition-colors"
-              >
-                TikTok
-              </a>
-              <a
-                href="https://www.instagram.com/oneprompt.gr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-brand-border text-brand-text text-sm rounded-lg hover:border-brand-muted transition-colors"
-              >
-                Instagram
-              </a>
-            </div>
+            {/* Στο τέλος του άρθρου ο αναγνώστης είναι στο peak της
+                πρόθεσης — τον κρατάμε με το newsletter αντί να τον
+                στείλουμε αλλού. */}
+            <Link
+              href={`/${locale}/subscribe`}
+              className="inline-flex px-4 py-2 bg-brand-teal text-brand-dark font-semibold text-sm rounded-lg hover:bg-brand-teal-light transition-colors"
+            >
+              {t.article.ctaButton}
+            </Link>
           </div>
           </div>
         </div>

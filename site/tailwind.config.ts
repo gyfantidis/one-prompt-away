@@ -7,6 +7,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Πολύ στενά κινητά (iPhone SE/mini). Κάτω από αυτό το πλάτος
+      // το nav θυσιάζει το "Σχετικά" για να χωρέσει το CTA εγγραφής.
+      screens: {
+        xs: "420px",
+      },
       colors: {
         brand: {
           dark: "#0D1117",

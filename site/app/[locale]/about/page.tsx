@@ -96,22 +96,12 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
               {t.about.contactText}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="https://www.tiktok.com/@oneprompt.gr"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/${locale}/subscribe`}
                 className="px-4 py-2 bg-brand-teal text-brand-dark font-semibold text-sm rounded-lg hover:bg-brand-teal-light transition-colors font-mono"
               >
-                TikTok
-              </a>
-              <a
-                href="https://www.instagram.com/oneprompt.gr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-brand-border text-brand-text text-sm rounded-lg hover:border-brand-muted transition-colors font-mono"
-              >
-                Instagram
-              </a>
+                {t.about.subscribeLink}
+              </Link>
               <Link
                 href={`/${locale}/articles`}
                 className="px-4 py-2 border border-brand-border text-brand-text text-sm rounded-lg hover:border-brand-muted transition-colors font-mono"
@@ -123,6 +113,26 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
                 className="px-4 py-2 border border-brand-teal text-brand-teal text-sm rounded-lg hover:bg-brand-teal hover:text-brand-dark transition-colors font-mono"
               >
                 info@oneprompt.gr
+              </a>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-brand-muted">
+              <span>{t.about.socialsNote}</span>
+              <a
+                href="https://www.tiktok.com/@oneprompt.gr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-brand-text"
+              >
+                TikTok
+              </a>
+              <a
+                href="https://www.instagram.com/oneprompt.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-brand-text"
+              >
+                Instagram
               </a>
             </div>
           </div>
