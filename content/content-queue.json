@@ -123,8 +123,8 @@
     {
       "topic": "Negative prompting: Το να λες τι ΝΑ ΜΗΝ κάνει είναι πιο δυνατό απ' ό,τι νομίζεις",
       "category": "behind-the-prompt",
-      "status": "pending",
-      "published": null
+      "status": "done",
+      "published": "2026-09-21"
     },
     {
       "topic": "Έκανα mock interview με AI πριν τη συνέντευξη — πέρασα",
