@@ -3,7 +3,7 @@ import { useCurrentFrame, Sequence, interpolate, spring, useVideoConfig } from "
 import { BRAND } from "../theme";
 import { FadeIn, BrandWatermark, CategoryBadge } from "../components";
 
-interface ToolDropVideoProps {
+type ToolDropVideoProps = {
   toolName: string;
   tagline: string;
   features: string[];

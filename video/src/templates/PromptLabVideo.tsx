@@ -9,7 +9,7 @@ import {
   TerminalWindow,
 } from "../components";
 
-interface PromptLabVideoProps {
+type PromptLabVideoProps = {
   title: string;
   problem: string;
   prompt: string;

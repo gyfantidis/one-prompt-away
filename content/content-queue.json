@@ -127,6 +127,36 @@
       "published": "2026-09-21"
     },
     {
+      "topic": "Φωτογράφισα 5 πράγματα στο σπίτι — το AI έλυσε όλα τα προβλήματα",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Έφτιαξα τραγούδι γενεθλίων για φίλο με ένα prompt — έκλαψε",
+      "category": "tool-drop",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Ρώτησα το ίδιο πράγμα με 2 τρόπους — η μία απάντηση ήταν άχρηστη, η άλλη με άφησε άφωνο",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Το AI διάβασε 200 κριτικές για το ξενοδοχείο — μου είπε σε 3 γραμμές αν αξίζει",
+      "category": "prompt-lab",
+      "status": "pending",
+      "published": null
+    },
+    {
+      "topic": "Ζήτησα από το AI να κάνει τον δικηγόρο του διαβόλου για μια απόφασή μου — άλλαξα γνώμη",
+      "category": "behind-the-prompt",
+      "status": "pending",
+      "published": null
+    },
+    {
       "topic": "Έκανα mock interview με AI πριν τη συνέντευξη — πέρασα",
       "category": "prompt-lab",
       "status": "pending",
@@ -201,12 +231,6 @@
     {
       "topic": "Από λευκή σελίδα σε δομημένη εργασία σε 20 λεπτά",
       "category": "prompt-lab",
-      "status": "pending",
-      "published": null
-    },
-    {
-      "topic": "Suno: Έφτιαξα τραγούδι γενεθλίων για φίλο με ένα prompt",
-      "category": "tool-drop",
       "status": "pending",
       "published": null
     },

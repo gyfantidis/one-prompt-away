@@ -1,10 +1,16 @@
 import { Composition } from "remotion";
+import { computeTiming } from "./theme";
+import type { VideoContent } from "./theme";
 import { OPAVideo } from "./OPAVideo";
 import { PromptLabVideo } from "./templates/PromptLabVideo";
 import { ToolDropVideo } from "./templates/ToolDropVideo";
 
-// 60 seconds at 30fps = 1800 frames
-// TikTok/Reels: 1080x1920 (9:16)
+// TikTok/Reels: 1080x1920 (9:16) στα 30fps.
+//
+// Η διάρκεια ΔΕΝ είναι πια σταθερή. Το calculateMetadata τρέχει πριν
+// το render και τη βγάζει από το ίδιο το κείμενο, με την ίδια
+// συνάρτηση που χρησιμοποιεί και το component — ώστε να μη γίνεται
+// ποτέ το βίντεο μακρύτερο από όσο κρατάει το νόημά του.
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -13,10 +19,13 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="OPAVideo"
         component={OPAVideo}
-        durationInFrames={1800}
+        durationInFrames={900}
         fps={30}
         width={1080}
         height={1920}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: computeTiming(props as unknown as VideoContent, 30).total,
+        })}
         defaultProps={{
           hook: "Ξέρεις πόσο χρόνο χάνεις γράφοντας emails;",
           steps: [

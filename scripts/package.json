@@ -7,7 +7,9 @@
     "generate": "tsx generate-article.ts",
     "generate:video": "tsx generate-video.ts",
     "publish:social": "tsx publish-social.ts",
-    "newsletter": "tsx send-newsletter.ts"
+    "newsletter": "tsx send-newsletter.ts",
+    "video": "tsx render-video.ts",
+    "video:props": "tsx make-video-props.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",

@@ -1,22 +1,10 @@
 import React from "react";
-import {
-  useCurrentFrame,
-  useVideoConfig,
-  Sequence,
-  interpolate,
-  spring,
-  Easing,
-} from "remotion";
-import { BRAND, TIMING } from "./theme";
-import {
-  FadeIn,
-  TypeWriter,
-  BrandWatermark,
-  CategoryBadge,
-  TerminalWindow,
-} from "./components";
+import { useCurrentFrame, useVideoConfig, Sequence, interpolate } from "remotion";
+import { BRAND, computeTiming } from "./theme";
+import { FadeIn, TypeWriter, CategoryBadge } from "./components";
+import { SAFE, SAFE_BOX, RESERVED } from "./safeZones";
 
-interface OPAVideoProps {
+type OPAVideoProps = {
   hook: string;
   steps: string[];
   prompt: string;
@@ -24,7 +12,67 @@ interface OPAVideoProps {
   cta: string;
   category: "prompt-lab" | "tool-drop" | "behind-the-prompt";
   brandTag: string;
-}
+  /** Το κουμπί εγγραφής στην τελική κάρτα. */
+  subscribeCta?: string;
+  /** Η σημείωση κάτω από το κουμπί — τι κερδίζει ο χρήστης. */
+  subscribeNote?: string;
+  /** Δείχνει με κόκκινο τι σκεπάζει το UI των πλατφορμών. Μόνο για έλεγχο. */
+  debugSafe?: boolean;
+};
+
+/**
+ * Κλίμακα τυπογραφίας για καμβά 1080×1920.
+ *
+ * Το βίντεο το βλέπουν σε κινητό ~400px πλάτους, δηλαδή σμικρυμένο
+ * κατά 2.7 φορές. Ό,τι φαίνεται «κανονικό» πάνω στον καμβά βγαίνει
+ * μικρό στο τηλέφωνο — γι' αυτό όλα είναι αισθητά μεγαλύτερα από ό,τι
+ * θα έβαζες σε σελίδα.
+ */
+const TYPE = {
+  hook: 78,
+  step: 46,
+  stepNum: 32,
+  termTitle: 22,
+  prompt: 34,
+  result: 44,
+  cta: 62,
+  tag: 42,
+  note: 34,
+  logo: 30,
+} as const;
+
+/**
+ * Όλο το κείμενο ζει μέσα στο SAFE_BOX. Τα διακοσμητικά (πλέγμα,
+ * λάμψη) επιτρέπεται να φτάνουν στα άκρα — αν τα σκεπάσει το UI της
+ * πλατφόρμας, δεν χάνεται πληροφορία.
+ */
+const BAR_ROOM = 40;   // χώρος για τη μπάρα προόδου στο κάτω όριο
+const NAV_H = 76;      // ύψος της nav μπάρας
+const NAV_GAP = 34;    // απόσταση nav από το περιεχόμενο
+
+// Το περιεχόμενο ξεκινά ΚΑΤΩ από τη nav, που με τη σειρά της ξεκινά
+// στην αρχή της ζώνης ασφαλείας — ποτέ πάνω από αυτήν.
+const SAFE_PAD = [
+  `${SAFE.top + NAV_H + NAV_GAP}px`,
+  `${SAFE.right}px`,
+  `${SAFE.bottom + BAR_ROOM}px`,
+  `${SAFE.left}px`,
+].join(" ");
+
+/** Το λογότυπο του site, ίδιο με το nav: "> OnePromptAway". */
+const Logo: React.FC = () => (
+  <div
+    style={{
+      fontFamily: BRAND.fonts.mono,
+      fontSize: TYPE.logo,
+      fontWeight: 700,
+      color: BRAND.colors.text,
+    }}
+  >
+    <span style={{ color: BRAND.colors.muted }}>{"> "}</span>
+    One<span style={{ color: BRAND.colors.teal }}>Prompt</span>Away
+  </div>
+);
 
 export const OPAVideo: React.FC<OPAVideoProps> = ({
   hook,
@@ -34,11 +82,25 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
   cta,
   category,
   brandTag,
+  subscribeCta = "Εγγραφή στο oneprompt.gr",
+  subscribeNote = "Κάθε Δευτέρα ένα νέο άρθρο",
+  debugSafe = false,
 }) => {
   const frame = useCurrentFrame();
-  const { fps, width, height } = useVideoConfig();
+  const { fps, width, height, durationInFrames } = useVideoConfig();
 
   const catColor = BRAND.categoryColors[category] || BRAND.colors.teal;
+
+  // Ο χρονισμός βγαίνει από το ίδιο το κείμενο — δες computeTiming
+  // στο theme.ts για το γιατί.
+  const T = computeTiming(
+    { hook, steps, prompt, result, cta, subscribeCta, subscribeNote },
+    fps
+  );
+
+  const progress = interpolate(frame, [0, durationInFrames - 1], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
@@ -54,7 +116,7 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
         overflow: "hidden",
       }}
     >
-      {/* Background grid pattern */}
+      {/* Πλέγμα φόντου */}
       <div
         style={{
           position: "absolute",
@@ -67,7 +129,6 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
         }}
       />
 
-      {/* Glow orb */}
       <div
         style={{
           position: "absolute",
@@ -81,134 +142,178 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
         }}
       />
 
-      {/* ===== SECTION 1: HOOK (0-3s) ===== */}
-      <Sequence from={TIMING.hookStart} durationInFrames={TIMING.hookEnd}>
+      {/* ===== SECTION 1: HOOK ===== */}
+      <Sequence from={T.hookStart} durationInFrames={T.hookDur}>
         <div
           style={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            justifyContent: "space-evenly",
             alignItems: "center",
-            padding: "0 60px",
-            gap: 30,
+            padding: SAFE_PAD,
           }}
         >
-          <FadeIn delay={5}>
+          <FadeIn delay={3}>
             <CategoryBadge category={category} />
           </FadeIn>
-          <FadeIn delay={15}>
+          <FadeIn delay={10}>
             <div
               style={{
                 fontFamily: BRAND.fonts.mono,
-                fontSize: 52,
+                fontSize: TYPE.hook,
                 fontWeight: 700,
                 color: BRAND.colors.text,
                 textAlign: "center",
-                lineHeight: 1.3,
+                lineHeight: 1.25,
               }}
             >
               {hook}
             </div>
           </FadeIn>
+          <FadeIn delay={20}>
+            {/* Ο κέρσορας που αναβοσβήνει, όπως στο terminal της αρχικής */}
+            <div
+              style={{
+                width: 22,
+                height: 56,
+                backgroundColor: BRAND.colors.teal,
+                opacity: Math.sin(frame * 0.3) > 0 ? 1 : 0.15,
+              }}
+            />
+          </FadeIn>
         </div>
       </Sequence>
 
-      {/* ===== SECTION 2: BODY — Steps + Prompt (3-48s) ===== */}
-      <Sequence from={TIMING.bodyStart} durationInFrames={TIMING.bodyEnd - TIMING.bodyStart}>
+      {/* ===== SECTION 2: BODY ===== */}
+      <Sequence from={T.bodyStart} durationInFrames={T.bodyDur}>
+        {/* space-between: βήματα ψηλά, prompt στο κέντρο, αποτέλεσμα
+            χαμηλά. Γεμίζει το κάδρο και δίνει καθαρή σειρά ανάγνωσης. */}
         <div
           style={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            padding: "0 40px",
-            gap: 40,
+            justifyContent: "space-between",
+            padding: SAFE_PAD,
           }}
         >
-          {/* Steps */}
-          {steps.map((step, i) => (
-            <FadeIn key={i} delay={i * 60 + 10}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 20,
-                  padding: "0 20px",
-                }}
-              >
+          {/* Βήματα ως κάρτες — ίδιο λεξιλόγιο με τις κάρτες άρθρων */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+            {steps.map((step, i) => (
+              <FadeIn key={i} delay={T.stepDelays[i]}>
                 <div
                   style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 12,
-                    backgroundColor: `${catColor}20`,
-                    border: `2px solid ${catColor}40`,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: BRAND.fonts.mono,
-                    fontSize: 24,
-                    fontWeight: 700,
-                    color: catColor,
-                    flexShrink: 0,
+                    gap: 26,
+                    backgroundColor: BRAND.colors.surface,
+                    border: `2px solid ${BRAND.colors.border}`,
+                    borderRadius: 18,
+                    padding: "26px 30px",
                   }}
                 >
-                  {i + 1}
+                  <div
+                    style={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: 14,
+                      backgroundColor: `${catColor}20`,
+                      border: `2px solid ${catColor}50`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: BRAND.fonts.mono,
+                      fontSize: TYPE.stepNum,
+                      fontWeight: 700,
+                      color: catColor,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {i + 1}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: TYPE.step,
+                      color: BRAND.colors.text,
+                      lineHeight: 1.35,
+                      fontWeight: 500,
+                    }}
+                  >
+                    {step}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontSize: 36,
-                    color: BRAND.colors.text,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {step}
-                </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
 
-          {/* Terminal with prompt */}
-          <FadeIn delay={steps.length * 60 + 40}>
-            <TerminalWindow title="prompt">
-              <TypeWriter
-                text={`> ${prompt}`}
-                startFrame={steps.length * 60 + 60}
-                speed={1}
-                style={{
-                  fontSize: 28,
-                  color: BRAND.colors.text,
-                  lineHeight: 1.6,
-                }}
-              />
-            </TerminalWindow>
-          </FadeIn>
-
-          {/* Result */}
-          <FadeIn delay={steps.length * 60 + 200}>
+          {/* Terminal — αντίγραφο του terminal block της αρχικής */}
+          <FadeIn delay={T.promptDelay}>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-                padding: "0 60px",
+                backgroundColor: BRAND.colors.surface,
+                border: `2px solid ${BRAND.colors.border}`,
+                borderRadius: 18,
+                overflow: "hidden",
               }}
             >
               <div
                 style={{
-                  fontSize: 36,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  padding: "18px 26px",
+                  borderBottom: `1px solid ${BRAND.colors.border}`,
+                }}
+              >
+                <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "#EF444499" }} />
+                <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "#EAB30899" }} />
+                <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "#22C55E99" }} />
+                <span
+                  style={{
+                    marginLeft: 14,
+                    fontFamily: BRAND.fonts.mono,
+                    fontSize: TYPE.termTitle,
+                    color: BRAND.colors.muted,
+                  }}
+                >
+                  prompt
+                </span>
+              </div>
+              <div style={{ padding: "30px 32px", minHeight: 160 }}>
+                <TypeWriter
+                  text={`> ${prompt}`}
+                  startFrame={T.typeStart}
+                  speed={T.typeSpeed}
+                  style={{
+                    fontSize: TYPE.prompt,
+                    color: BRAND.colors.text,
+                    lineHeight: 1.55,
+                  }}
+                />
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Αποτέλεσμα — το πράσινο ✓ του terminal της αρχικής */}
+          <FadeIn delay={T.resultDelay}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+              <div
+                style={{
+                  fontSize: TYPE.result,
                   color: "#4ADE80",
                   fontFamily: BRAND.fonts.mono,
+                  flexShrink: 0,
                 }}
               >
                 ✓
               </div>
               <div
                 style={{
-                  fontSize: 34,
+                  fontSize: TYPE.result,
                   color: BRAND.colors.text,
                   fontWeight: 600,
+                  lineHeight: 1.3,
                 }}
               >
                 {result}
@@ -218,43 +323,74 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
         </div>
       </Sequence>
 
-      {/* ===== SECTION 3: CTA (48-60s) ===== */}
-      <Sequence from={TIMING.ctaStart} durationInFrames={TIMING.ctaEnd - TIMING.ctaStart}>
+      {/* ===== SECTION 3: CTA ===== */}
+      <Sequence from={T.ctaStart} durationInFrames={T.ctaDur}>
         <div
           style={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            justifyContent: "space-evenly",
             alignItems: "center",
-            padding: "0 60px",
-            gap: 40,
+            padding: SAFE_PAD,
           }}
         >
-          <FadeIn delay={5}>
+          <FadeIn delay={3}>
             <div
               style={{
                 fontFamily: BRAND.fonts.mono,
-                fontSize: 48,
+                fontSize: TYPE.cta,
                 fontWeight: 700,
                 color: BRAND.colors.text,
                 textAlign: "center",
-                lineHeight: 1.3,
+                lineHeight: 1.25,
               }}
             >
               {cta}
             </div>
           </FadeIn>
-          <FadeIn delay={20}>
+          <FadeIn delay={14}>
             <div
               style={{
-                padding: "16px 40px",
-                borderRadius: 12,
-                backgroundColor: catColor,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 22,
+              }}
+            >
+              {/* Το teal κουμπί του site: γεμάτο teal, σκούρο κείμενο */}
+              <div
+                style={{
+                  padding: "24px 52px",
+                  borderRadius: 14,
+                  backgroundColor: BRAND.colors.teal,
+                  fontFamily: BRAND.fonts.mono,
+                  fontSize: TYPE.tag,
+                  fontWeight: 700,
+                  color: BRAND.colors.dark,
+                  textAlign: "center",
+                }}
+              >
+                {subscribeCta}
+              </div>
+              <div
+                style={{
+                  fontSize: TYPE.note,
+                  color: BRAND.colors.muted,
+                  textAlign: "center",
+                  lineHeight: 1.35,
+                }}
+              >
+                {subscribeNote}
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn delay={24}>
+            <div
+              style={{
                 fontFamily: BRAND.fonts.mono,
-                fontSize: 32,
-                fontWeight: 700,
-                color: BRAND.colors.dark,
+                fontSize: TYPE.tag - 8,
+                color: BRAND.colors.muted,
               }}
             >
               {brandTag}
@@ -263,8 +399,90 @@ export const OPAVideo: React.FC<OPAVideoProps> = ({
         </div>
       </Sequence>
 
-      {/* Persistent watermark */}
-      <BrandWatermark />
+      {/* ===== Μόνιμα στοιχεία, σε κάθε καρέ ===== */}
+
+      {/* Nav μπάρα — κάθεται ΜΕΣΑ στη ζώνη ασφαλείας, αλλιώς την
+          σκεπάζουν τα tabs της πλατφόρμας. */}
+      <div
+        style={{
+          position: "absolute",
+          top: SAFE.top,
+          left: SAFE.left,
+          right: SAFE.right,
+          height: NAV_H,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: `1px solid ${BRAND.colors.border}`,
+        }}
+      >
+        <Logo />
+        <span
+          style={{
+            fontFamily: BRAND.fonts.mono,
+            fontSize: 24,
+            color: BRAND.colors.muted,
+          }}
+        >
+          oneprompt.gr
+        </span>
+      </div>
+
+      {/* Μπάρα προόδου — στο ΚΑΤΩ ΟΡΙΟ της ζώνης, όχι στο κάτω άκρο
+          του κάδρου, που το τρώει η λεζάντα. */}
+      <div
+        style={{
+          position: "absolute",
+          top: SAFE.top + SAFE_BOX.height - 8,
+          left: SAFE.left,
+          right: SAFE.right,
+          height: 8,
+          borderRadius: 4,
+          backgroundColor: BRAND.colors.border,
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            width: `${progress * 100}%`,
+            height: "100%",
+            backgroundColor: catColor,
+          }}
+        />
+      </div>
+
+      {/* Debug overlay: τι σκεπάζει το UI των πλατφορμών. */}
+      {debugSafe && (
+        <>
+          {RESERVED.map((r, i) => (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                top: "top" in r ? r.top : undefined,
+                bottom: "bottom" in r ? r.bottom : undefined,
+                left: "left" in r ? r.left : undefined,
+                right: "right" in r ? r.right : undefined,
+                width: "width" in r ? r.width : undefined,
+                height: "height" in r ? r.height : undefined,
+                backgroundColor: "#EF444433",
+                border: "3px dashed #EF4444AA",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                whiteSpace: "pre-line",
+                fontFamily: BRAND.fonts.mono,
+                fontSize: 26,
+                color: "#FCA5A5",
+              }}
+            >
+              {r.label}
+            </div>
+          ))}
+        </>
+      )}
+
     </div>
   );
 };

@@ -1,0 +1,13 @@
+{
+  "hook": "Κάθε Κυριακή έχανα 2 ώρες στο τι θα μαγειρέψω.",
+  "steps": [
+    "Βάζω constraints: budget, χρόνος, άτομα",
+    "Ζητάω overlapping υλικά σε 2+ γεύματα",
+    "Ορίζω output: πίνακας και λίστα αγορών"
+  ],
+  "prompt": "Φτιάξε meal plan Δευτ-Παρ για 2 άτομα, έως €50, 30 λεπτά/γεύμα, overlapping υλικά.",
+  "result": "Plan 5 ημερών και λίστα με 23 items, €47.50",
+  "cta": "Άλλαξε budget και διατροφή, και πάτα Enter.",
+  "category": "prompt-lab",
+  "brandTag": "@oneprompt.gr"
+}
