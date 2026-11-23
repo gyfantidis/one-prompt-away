@@ -1,0 +1,129 @@
+---
+title: "I Don't Know Excel — And I Create Formulas With One Prompt"
+description: "Learn how to create Excel formulas without any spreadsheet knowledge. Just describe what you need in plain words and let AI write the formula for you."
+date: "2026-11-23"
+category: "prompt-lab"
+tags: ["excel","formulas","productivity","chatgpt","spreadsheets"]
+readingTime: "4 min"
+---
+
+## My Excel Confession
+
+I've been avoiding Excel for years. Every time someone sent me a spreadsheet, I'd panic. VLOOKUP? SUMIF? Those words meant nothing to me.
+
+Then I discovered something that changed everything. I can describe what I want in plain English, and AI writes the formula for me. No tutorials. No courses. Just one prompt.
+
+## How This Actually Works
+
+You open ChatGPT (or any free AI chat tool like Claude or Google Gemini). You describe your problem like you're talking to a friend. The AI gives you the exact formula to copy and paste.
+
+That's it. Really.
+
+## The Prompt Template That Works Every Time
+
+Here's the structure I use:
+
+prompt
+I have an Excel spreadsheet with [describe your columns].
+I need a formula that [what you want to calculate].
+The data starts in row 2. Row 1 has headers.
+Give me the formula and explain what each part does in simple terms.
+
+
+Let me show you real examples.
+
+## Example 1: Calculate Total Sales
+
+I have sales data. Column A has product names. Column B has quantities. Column C has prices. I need the total revenue.
+
+prompt
+I have an Excel spreadsheet with:
+- Column A: Product names
+- Column B: Quantities sold
+- Column C: Price per item
+
+I need a formula that calculates total revenue (quantity × price) for each row.
+Data starts in row 2.
+Give me the formula and explain it simply.
+
+
+The AI responds with: `=B2*C2`
+
+And explains: "This multiplies the quantity in B2 by the price in C2. Drag it down to apply to all rows."
+
+Simple. Done.
+
+## Example 2: Find Names That Match a Condition
+
+This is where it gets powerful. I needed to sum only sales from a specific salesperson.
+
+prompt
+I have a spreadsheet with:
+- Column A: Salesperson name
+- Column B: Sale amount
+
+I need a formula that adds up all sales ONLY for "Maria".
+Data is in rows 2 to 100.
+Explain what each part means.
+
+
+The AI gives me: `=SUMIF(A2:A100,"Maria",B2:B100)`
+
+And breaks it down:
+- SUMIF means "sum if a condition is true"
+- A2:A100 is where to look for the name
+- "Maria" is what to look for
+- B2:B100 is what to add up when found
+
+I would have never figured this out on my own. Now I understand it.
+
+## Example 3: Look Up Information From Another Sheet
+
+This one used to terrify me. I have a product code and need to find its price from a separate list.
+
+prompt
+I have two sheets in Excel.
+
+Sheet1 has:
+- Column A: Product codes I'm working with
+
+Sheet2 has:
+- Column A: All product codes
+- Column B: Prices for each code
+
+I need a formula in Sheet1 that looks up each product code and brings back its price from Sheet2.
+Explain VLOOKUP to me like I'm 10 years old.
+
+
+The AI gives me the formula AND explains it with an analogy about looking up a phone number in a contacts list. Finally, VLOOKUP makes sense.
+
+## Pro Tips I Learned Along the Way
+
+**Always mention your row numbers.** Tell the AI where your data starts and ends. "Data is in rows 2 to 50" prevents errors.
+
+**Ask for explanations.** Don't just copy the formula. Ask the AI to explain each part. You'll actually learn something.
+
+**Test with simple data first.** Before applying a formula to 10,000 rows, test it on 5 rows. Make sure it works.
+
+**When something breaks, describe the error.** If Excel shows #REF! or #VALUE!, paste that error into the AI chat. Ask what went wrong. It usually knows.
+
+## What About Google Sheets?
+
+Same prompts work. Just mention "Google Sheets" instead of "Excel". Most formulas are identical. When they're different, the AI will give you the right version.
+
+## The Formula I Use Most
+
+Honestly? It's the conditional sum. Every month I need to add up expenses by category, sales by region, hours by project. One prompt, one formula, done.
+
+prompt
+Google Sheets formula to sum all values in column C where column A equals "Marketing".
+Data in rows 2-200.
+
+
+## Your Turn
+
+Open ChatGPT right now. Think of one spreadsheet task you've been avoiding. Describe it in plain words. Get your formula.
+
+You don't need to become an Excel expert. You just need to describe your problem clearly. The AI handles the technical part.
+
+I went from Excel-phobic to actually volunteering to help with spreadsheets at work. That's the power of one good prompt.
